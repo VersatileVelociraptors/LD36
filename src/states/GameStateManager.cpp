@@ -17,6 +17,10 @@ void GameStateManager::update(float dt){
 	getCurrentState()->update(dt);
 }
 
+void GameStateManager::set(StateEnumeration state){
+	
+}
+
 sf::RenderWindow* GameStateManager::getWindow(){
 	return window;
 }

@@ -7,15 +7,17 @@
 
 #include <SFML/Graphics.hpp>
 
+enum StateEnumeration {
+	MENU, PLAY, END;
+};
+
 class GameStateManager
 {
 public:
 	GameStateManager(sf::RenderWindow *window);
 	~GameStateManager();
 
-	void set(int state);
-	void push(int state);
-	void pop();
+	void set(StateEnumeration state);
 	void render();
 	void update(float dt);
 	sf::RenderWindow* getWindow();
