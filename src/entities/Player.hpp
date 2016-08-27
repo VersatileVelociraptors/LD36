@@ -8,8 +8,11 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 #include "Mob.hpp"
+
+#define DIMENSION_CHANGE_DELAY 0.25 // in seconds
 
 class Player : public Mob
 {
@@ -27,7 +30,7 @@ private:
 	sf::RenderWindow *window;
 	std::vector<sf::Vector2i> walls;
 	int dir;
-	int dimension_timer = 0;
+	sf::Clock dimension_timer;
 	
 };
 

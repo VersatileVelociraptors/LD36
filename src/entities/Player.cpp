@@ -46,11 +46,11 @@ int Player::getDir(){
 }
 
 void Player::update(float dt){
-	
-	// change dimensions
-	if (dimension_timer > 10 && (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))) {
+	if (dimension_timer.getElapsedTime().asSeconds() > DIMENSION_CHANGE_DELAY &&
+			(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))) {
+		// change dimensions
 		level->changeDimensions();
-		dimension_timer = 0;
+		dimension_timer.restart();
 	}
 
 	// move around with keyboard input
@@ -151,6 +151,4 @@ void Player::update(float dt){
 			break;
 		}
 	}
-	
-	dimension_timer++;
 }
