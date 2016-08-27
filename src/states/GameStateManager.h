@@ -21,6 +21,7 @@ public:
 	sf::RenderWindow* getWindow();
 	MusicManager* getMusicManager();
 	State* getCurrentState();
+	void setCurrentState(State* state);
 
 private:
 	State* currentState;

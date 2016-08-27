@@ -8,14 +8,14 @@ LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
 OBJ= main.o
 OBJ+= State.o GameStateManager.o
-OBJ+= AudioManager.o MusicManager.o SoundManager.o 
+OBJ+= AudioManager.o MusicManager.o SoundManager.o
 EXEC_FILE= LD36Test
 LINK= -o $(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
 all: $(EXEC_FILE)
 
 linux_link:
-	cd $(BIN_DIR)$(LINUX_OUTPUT); $(CC) $(OBJ) $(LINK)	
+	cd $(BIN_DIR)$(LINUX_OUTPUT); $(CC) $(OBJ) $(LINK)
 
 pack:
 	cd $(BIN_DIR); mkdir -p Linux Windows; \
@@ -35,14 +35,17 @@ win32 : PKG_CONFIG =$(CROSS)pkg-config
 
 win32 : CFLAGS+=-D_WIN32
 
-win32 : LINK= -o $(EXEC_FILE).exe -lsfml-main -lsfml-window-s -lsfml-graphics-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lgdi32 -ljpeg -lfreetype -lpng -lbz2 -lharfbuzz -lz -lglib-2.0 -lintl -lws2_32 -liconv -lsndfile -lFLAC -lvorbisfile -lvorbisenc -lvorbis -logg -ldsound -lOpenAL32 -lole32 -lwinmm 
+win32 : LINK= -o $(EXEC_FILE).exe -lsfml-main -lsfml-window-s -lsfml-graphics-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lgdi32 -ljpeg -lfreetype -lpng -lbz2 -lharfbuzz -lz -lglib-2.0 -lintl -lws2_32 -liconv -lsndfile -lFLAC -lvorbisfile -lvorbisenc -lvorbis -logg -ldsound -lOpenAL32 -lole32 -lwinmm
 
 win32: $(EXEC_FILE).exe
 
 win32_link:
 	cd $(BIN_DIR)$(WINDOWS_OUTPUT); $(CC) $(OBJ) $(LINK)
+	
+linux_dir:
+	mkdir -p $(BIN_DIR)$(LINUX_OUTPUT)
 
-$(EXEC_FILE): $(OBJ)
+$(EXEC_FILE): linux_dir $(OBJ)
 	cd $(BIN_DIR)$(LINUX_OUTPUT); $(CC) $(OBJ) $(LINK)
 
 $(EXEC_FILE).exe: $(OBJ)
@@ -73,7 +76,7 @@ SoundManager.o:
 clean_all: clean clean_win32 clean_exec
 
 .PHONY: clean
-clean: 
+clean:
 	cd $(BIN_DIR)$(LINUX_OUTPUT);	rm -f $(OBJ) $(EXEC_FILE)
 
 .PHONY: clean_win32
