@@ -38,8 +38,7 @@ public:
 	SoundManager* getSoundManager();
 
 
-	// new code
-
+	// grid based collision
 	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
 	bool tile_solid_grid(int x, int y);
 
