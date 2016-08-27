@@ -38,7 +38,7 @@ void PlayState::render(){
 
 	coordinate_string+=std::to_string(level->getPlayer()->get_grid().x)+", "+std::to_string(level->getPlayer()->get_grid().y);
 	sf::Text coordinates;
-	coordinates.setFont(level->font);
+	coordinates.setFont(level->getFont());
 	coordinates.setCharacterSize(12);
 	coordinates.setPosition(level->getPlayer()->getPosition().x, level->getPlayer()->getPosition().y);
 	coordinates.setString(coordinate_string);

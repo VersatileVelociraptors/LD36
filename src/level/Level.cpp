@@ -165,6 +165,36 @@ int Level::tileType(int x, int y){
 		return tileMap[index];
 }
 
+// grid based collision
+
+int Level::tile_type_grid(int x, int y){
+	int index = (y * width) + x;
+	if(index < 0 || index >= width * height)
+		return -1;
+	else
+		return tileMap[index];
+}
+
+bool Level::tile_solid_grid(int x, int y){
+	int tile = tile_type_grid(x,y);
+	if (tile == DIMENSION_TILE) {
+		int subtileCount = 0;
+		// find the number of subtiles after this one
+		for (int i = (y * width) + x + 1; i < width * height; i++) {
+			if (tileMap[i] == DIMENSION_TILE) {
+				subtileCount++;
+			}
+		}
+		int subtileIndex = SUBLEVEL_SIZE -1 - subtileCount;
+		int *sublevel = currentSublevelMap();// sub level B tile after change
+		tile = sublevel[subtileIndex];
+		if (changedDimension) {
+			tile -= TILE_TYPES;
+		}
+	}
+	return tile==WALL_TILE;
+}
+
 sf::Vector2i Level::getTileCoordinates(int index){
 	sf::Vector2i position;
 	int x = index%width;
@@ -251,16 +281,6 @@ SoundManager* Level::getSoundManager(){
 	return this->soundManager;
 }
 
-// grid based collision
-
-int Level::tile_type_grid(int x, int y){
-	int index = (y * width) + x;
-	if(index < 0 || index >= width * height)
-		return -1;
-	else
-		return tileMap[index];
-}
-
-bool Level::tile_solid_grid(int x, int y){
-	return (tile_type_grid(x,y)==WALL_TILE);
+sf::Font Level::getFont(){
+	return font;
 }
