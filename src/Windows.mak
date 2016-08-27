@@ -8,12 +8,8 @@ CFLAGS=-c -std=c++11 -Wall -O3 -D_WIN32
 BIN_DIR=../bin/
 WINDOWS_OUTPUT=win32_build/
 OUTPUT = $(BIN_DIR)$(WINDOWS_OUTPUT)
-OBJ= $(OUTPUT)main.o
-OBJ+= $(OUTPUT)Tile.o $(OUTPUT)Level.o
-OBJ+= $(OUTPUT)GameStateManager.o $(OUTPUT)State.o $(OUTPUT)EndState.o $(OUTPUT)MenuState.o $(OUTPUT)PlayState.o
-OBJ+= $(OUTPUT)AudioManager.o $(OUTPUT)MusicManager.o $(OUTPUT)SoundManager.o
-OBJ+= $(OUTPUT)Entity.o $(OUTPUT)Mob.o $(OUTPUT)Player.o
-LINK= -o $(EXEC_FILE).exe -lsfml-main -lsfml-window-s -lsfml-graphics-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lgdi32 -ljpeg -lfreetype -lpng -lbz2 -lharfbuzz -lz -lglib-2.0 -lintl -lws2_32 -liconv -lsndfile -lFLAC -lvorbisfile -lvorbisenc -lvorbis -logg -ldsound -lOpenAL32 -lole32 -lwinmm 
+OBJ := $(addprefix $(OUTPUT),$(notdir $(CPP_FILES:.cpp=.o)))
+LINK= -o $(OUTPUT)$(EXEC_FILE).exe -lsfml-main -lsfml-window-s -lsfml-graphics-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lgdi32 -ljpeg -lfreetype -lpng -lbz2 -lharfbuzz -lz -lglib-2.0 -lintl -lws2_32 -liconv -lsndfile -lFLAC -lvorbisfile -lvorbisenc -lvorbis -logg -ldsound -lOpenAL32 -lole32 -lwinmm 
 
 all: $(OUTPUT)$(EXEC_FILE).exe
 
