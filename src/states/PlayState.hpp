@@ -1,6 +1,10 @@
 #ifndef PLAYSTATE_HPP
 #define PLAYSTATE_HPP
 
+#ifndef SFML_STATIC
+#define SFML_STATIC
+#endif
+
 #include <SFML/Graphics.hpp>
 
 #include "State.hpp"
