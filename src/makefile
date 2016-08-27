@@ -7,11 +7,6 @@ WINDOWS_OUTPUT=win32_build/
 LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
 CPP_FILES := $(shell find -type f -name '*.cpp')
-#OBJ= $(OUTPUT)main.o
-#OBJ+= $(OUTPUT)Tile.o $(OUTPUT)Level.o
-#OBJ+= $(OUTPUT)GameStateManager.o $(OUTPUT)State.o $(OUTPUT)EndState.o $(OUTPUT)MenuState.o $(OUTPUT)PlayState.o
-#OBJ+= $(OUTPUT)AudioManager.o $(OUTPUT)MusicManager.o $(OUTPUT)SoundManager.o
-#OBJ+= $(OUTPUT)Entity.o $(OUTPUT)Mob.o $(OUTPUT)Player.o
 EXEC_FILE= LD36Test
 LINK= -o $(OUTPUT)$(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 MAKE= make -f
@@ -27,11 +22,18 @@ linux:
 win32:
 	$(MAKE) Windows.mak
 
+
+pack: linux win32
+	cd $(BIN_DIR); mkdir -p Linux Windows; \
+	 cp -r ../assets/ Linux; cp -r ../assets/ Windows; \
+	 cp $(LINUX_OUTPUT)$(EXEC_FILE) Linux/; cp $(WINDOWS_OUTPUT)$(EXEC_FILE).exe Windows/; \
+	 zip -r $(EXEC_FILE).zip Linux/ Windows/;
+
 .PHONY: clean_all
 clean_all: clean clean_win32 clean_exec
 
 .PHONY: clean
-clean: clean_linux clean_win32
+clean: clean_linux clean_win32 clean_exec
 
 clean_linux:
 	$(MAKE) Linux.mak clean
@@ -41,7 +43,7 @@ clean_win32:
 
 .PHONY: clean_exec
 clean_exec:
-	cd $(BIN_DIR); rm -rf Linux/; rm -rf Windows/;
+	cd $(BIN_DIR); rm -rf Linux/; rm -rf Windows/; rm -f $(EXEC_FILE).zip;
 
 .PHONY: run
 run:

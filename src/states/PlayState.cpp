@@ -28,20 +28,4 @@ void PlayState::update(float dt){
 void PlayState::render(){
 	level->render();
 	window->draw(*level->getPlayer());// draw player texture
-
-	//for testing
-	std::string coordinate_string="";
-	
-
-	//coordinate_string+=std::to_string(level->getPlayer()->get_true().x)+", "+std::to_string(level->getPlayer()->get_true().y);
-
-
-	coordinate_string+=std::to_string(level->getPlayer()->get_grid().x)+", "+std::to_string(level->getPlayer()->get_grid().y);
-	sf::Text coordinates;
-	coordinates.setFont(level->getFont());
-	coordinates.setCharacterSize(12);
-	coordinates.setPosition(level->getPlayer()->getPosition().x, level->getPlayer()->getPosition().y);
-	coordinates.setString(coordinate_string);
-	coordinates.setColor(sf::Color::White);
-	window->draw(coordinates);
 }
