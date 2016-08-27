@@ -29,8 +29,7 @@ void Player::init(){
 	this->setTexture(this->texture);
 
 	this->diag = (int) this->speed * sqrt(2)/2;
-
-	walls = level->getWalls();
+	
 	sf::IntRect texture_rect = this->getTextureRect();
 	this->setOrigin(texture_rect.width/2, texture_rect.height/2);
 	this->setScale(1.0f, -1.0f);

@@ -12,6 +12,8 @@
 #include "../entities/Player.hpp"
 #include "../audio/SoundManager.hpp"
 
+#define SUBLEVEL_SIZE 4 // number of tiles in sublevel
+
 class Level
 {
 public:
@@ -22,12 +24,13 @@ public:
 	void setXOffset(int offset);
 	void setYOffset(int offset);
 	void loadLevel(char* path);
+	void loadFlareMapText(std::string fileName, int *map, bool alternateDimension);
 	void update(float dt);
 	void render();
 	bool inSolid(int x, int y);
 	int tileType(int x, int y);
-	std::vector<sf::Vector2i> getWalls();
-	sf::Vector2i getTileCoordinates(int index);
+	int tileIndex(sf::Vector2i position);
+	int tileIndex(int xPosition, int yPosition);
 	int getWidthInPixels();
 	int getHeightInPixels();
 	int getWidthInTiles();
@@ -36,12 +39,15 @@ public:
 	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
 	SoundManager* getSoundManager();
+	int *currentSublevelMap();
 	void changeDimensions();
 
 private:
 	sf::RenderWindow *window;
 	int width, height;
 	int *tileMap;
+	int *sublevelA;
+	int *sublevelB;
 	int xOffset, yOffset;
 	Tile *tiles;
 	Player *player;

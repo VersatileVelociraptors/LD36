@@ -25,5 +25,5 @@ void PlayState::update(float dt){
 
 void PlayState::render(){
 	level->render();
-	window->draw(*level->getPlayer());
+	window->draw(*level->getPlayer());// draw player texture
 }

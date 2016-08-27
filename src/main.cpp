@@ -13,6 +13,7 @@
 
 void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
 
+	// limited updates per second
 	if(*doUpdate){
 	 manager->update(dt);
 	 *doUpdate = false;

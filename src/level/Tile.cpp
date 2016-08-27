@@ -18,7 +18,7 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[BOX_TILE].loadFromFile("assets/images/box.png"))
 		this->window->close();
 
-	if(!textures[SNOOP_TILE].loadFromFile("assets/images/dogg.png"))
+	if(!textures[DIMENSION_TILE].loadFromFile("assets/images/dogg.png"))
 		this->window->close();
 	
 	// textures for alternate dimension
@@ -37,7 +37,7 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[BOX_TILE + TILE_TYPES].loadFromFile("assets/images/grass.png"))
 		this->window->close();
 	
-	if(!textures[SNOOP_TILE + TILE_TYPES].loadFromFile("assets/images/floor.png"))
+	if(!textures[DIMENSION_TILE + TILE_TYPES].loadFromFile("assets/images/floor.png"))
 		this->window->close();
 }
 

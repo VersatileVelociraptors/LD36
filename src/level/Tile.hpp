@@ -15,7 +15,7 @@
 #define FLOOR_TILE 2
 #define WALL_TILE 3
 #define BOX_TILE 4
-#define SNOOP_TILE 5
+#define DIMENSION_TILE 5
 
 class Tile
 {
