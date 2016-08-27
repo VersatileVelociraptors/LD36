@@ -4,7 +4,6 @@
 
 #include "states/GameStateManager.hpp"
 #include "audio/SoundManager.hpp"
-#include "level/Level.hpp"
 #include <iostream>
 #include <cstring>
 
@@ -12,17 +11,15 @@
 #define HEIGHT 720
 #define TITLE "LD36 Test"
 
-void update(GameStateManager* manager, Level* level, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
+void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
 
 	if(*doUpdate){
-	 //manager->update(dt);
-	 level->update(dt);
+	 manager->update(dt);
 	 *doUpdate = false;
 	}
 
 	manager->getWindow()->clear();
-	//manager->render();
-	level->render();
+	manager->render();
 	manager->getWindow()->draw(fps);
 	manager->getWindow()->draw(ups);
 	manager->getWindow()->display();
@@ -33,11 +30,8 @@ int main(int argc, char const *argv[])
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(false);
 	GameStateManager manager(&window);
-	std::string levelString = "assets/levels/level01.txt";
-	char levelCString [levelString.length() - 1];
-	std::strcpy(levelCString, levelString.c_str());
-	Level level(levelCString, &window);
-
+	manager.set(PLAY);
+	
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
 		window.close();
@@ -101,7 +95,7 @@ int main(int argc, char const *argv[])
 		ups.setString(ups_text);
 		ups.setColor(sf::Color::White);
 
-		update(&manager, &level, fps, ups, &doUpdate, dt);
+		update(&manager, fps, ups, &doUpdate, dt);
 		if(dt >= MS)
 			dt -= MS;
 		frames++;

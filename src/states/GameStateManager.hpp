@@ -4,6 +4,7 @@
 
 #include "State.hpp"
 #include "../audio/MusicManager.hpp"
+#include "PlayState.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -29,6 +30,7 @@ private:
 	State* currentState;
 	sf::RenderWindow *window;
 	MusicManager *musicManager;
+	PlayState* playState;
 	
 };
 

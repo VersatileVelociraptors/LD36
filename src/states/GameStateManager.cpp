@@ -1,11 +1,15 @@
 #include "GameStateManager.hpp"
+#include <iostream>
 
 GameStateManager::GameStateManager(sf::RenderWindow *window){
 	this->window = window;
+
+	playState = new PlayState(window);
+
 }
 
 GameStateManager::~GameStateManager(){
-	delete currentState;
+	delete playState;
 	delete musicManager;
 }
 
@@ -18,7 +22,12 @@ void GameStateManager::update(float dt){
 }
 
 void GameStateManager::set(StateEnumeration state){
-	
+	if(state == MENU)
+		std::cout << "Placeholder" << std::endl;
+	else if(state == PLAY)
+		currentState = playState;
+	else if(state == END)
+		std::cout << "Placeholder" << std::endl;
 }
 
 sf::RenderWindow* GameStateManager::getWindow(){

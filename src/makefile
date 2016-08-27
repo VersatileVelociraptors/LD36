@@ -8,7 +8,7 @@ LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
 OBJ= main.o
 OBJ+= Tile.o Level.o
-OBJ+= GameStateManager.o EndState.o MenuState.o PlayState.o
+OBJ+= GameStateManager.o State.o EndState.o MenuState.o PlayState.o
 OBJ+= AudioManager.o MusicManager.o SoundManager.o
 EXEC_FILE= LD36Test
 LINK= -o $(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
@@ -63,6 +63,9 @@ Level.o:
 
 GameStateManager.o:
 	$(CC) $(CFLAGS) states/GameStateManager.cpp -o $(OUTPUT)$@
+
+State.o:
+	$(CC) $(CFLAGS) states/State.cpp -o $(OUTPUT)$@
 
 EndState.o:
 	$(CC) $(CFLAGS) states/EndState.cpp -o $(OUTPUT)$@
