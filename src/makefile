@@ -6,18 +6,18 @@ BIN_DIR=../bin/
 WINDOWS_OUTPUT=win32_build/
 LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
-OBJ= main.o
-OBJ+= Tile.o Level.o
-OBJ+= GameStateManager.o State.o EndState.o MenuState.o PlayState.o
-OBJ+= AudioManager.o MusicManager.o SoundManager.o
-OBJ+= Entity.o Mob.o Player.o
+OBJ= $(OUTPUT)main.o
+OBJ+= $(OUTPUT)Tile.o $(OUTPUT)Level.o
+OBJ+= $(OUTPUT)GameStateManager.o $(OUTPUT)State.o $(OUTPUT)EndState.o $(OUTPUT)MenuState.o $(OUTPUT)PlayState.o
+OBJ+= $(OUTPUT)AudioManager.o $(OUTPUT)MusicManager.o $(OUTPUT)SoundManager.o
+OBJ+= $(OUTPUT)Entity.o $(OUTPUT)Mob.o $(OUTPUT)Player.o
 EXEC_FILE= LD36Test
-LINK= -o $(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+LINK= -o $(OUTPUT)$(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
-all: $(EXEC_FILE)
+all: $(BIN_DIR)$(LINUX_OUTPUT)$(EXEC_FILE)
 
 linux_link:
-	cd $(BIN_DIR)$(LINUX_OUTPUT); $(CC) $(OBJ) $(LINK)
+	$(CC) $(OBJ) $(LINK)
 
 pack:
 	cd $(BIN_DIR); mkdir -p Linux Windows; \
@@ -47,53 +47,53 @@ win32_link:
 linux_dir:
 	mkdir -p $(BIN_DIR)$(LINUX_OUTPUT)
 
-$(EXEC_FILE): linux_dir $(OBJ)
-	cd $(BIN_DIR)$(LINUX_OUTPUT); $(CC) $(OBJ) $(LINK)
+$(OUTPUT)$(EXEC_FILE): linux_dir $(OBJ)
+	$(CC) $(OBJ) $(LINK)
 
 $(EXEC_FILE).exe: $(OBJ)
 	cd $(BIN_DIR)$(WINDOWS_OUTPUT); $(CC) $(OBJ) $(LINK)
 
-main.o:
-	$(CC) $(CFLAGS) main.cpp -o $(OUTPUT)$@
+$(OUTPUT)main.o: main.cpp
+	$(CC) $(CFLAGS) main.cpp -o $@
 
-Tile.o:
-	$(CC) $(CFLAGS) level/Tile.cpp -o $(OUTPUT)$@
+$(OUTPUT)Tile.o: level/Tile.cpp
+	$(CC) $(CFLAGS) level/Tile.cpp -o$@
 
-Level.o:
-	$(CC) $(CFLAGS) level/Level.cpp -o $(OUTPUT)$@
+$(OUTPUT)Level.o: level/Level.cpp
+	$(CC) $(CFLAGS) level/Level.cpp -o $@
 
-GameStateManager.o:
-	$(CC) $(CFLAGS) states/GameStateManager.cpp -o $(OUTPUT)$@
+$(OUTPUT)GameStateManager.o: states/GameStateManager.cpp
+	$(CC) $(CFLAGS) states/GameStateManager.cpp -o $@
 
-State.o:
-	$(CC) $(CFLAGS) states/State.cpp -o $(OUTPUT)$@
+$(OUTPUT)State.o: states/State.cpp
+	$(CC) $(CFLAGS) states/State.cpp -o $@
 
-EndState.o:
-	$(CC) $(CFLAGS) states/EndState.cpp -o $(OUTPUT)$@
+$(OUTPUT)EndState.o: states/EndState.cpp
+	$(CC) $(CFLAGS) states/EndState.cpp -o $@
 
-MenuState.o:
-	$(CC) $(CFLAGS) states/MenuState.cpp -o $(OUTPUT)$@
+$(OUTPUT)MenuState.o: states/MenuState.cpp
+	$(CC) $(CFLAGS) states/MenuState.cpp -o $@
 
-PlayState.o:
-	$(CC) $(CFLAGS) states/PlayState.cpp -o $(OUTPUT)$@
+$(OUTPUT)PlayState.o: states/PlayState.cpp
+	$(CC) $(CFLAGS) states/PlayState.cpp -o $@
 
-AudioManager.o:
-	$(CC) $(CFLAGS) audio/AudioManager.cpp -o $(OUTPUT)$@
+$(OUTPUT)AudioManager.o: audio/AudioManager.cpp
+	$(CC) $(CFLAGS) audio/AudioManager.cpp -o $@
 
-MusicManager.o:
-	$(CC) $(CFLAGS) audio/MusicManager.cpp -o $(OUTPUT)$@
+$(OUTPUT)MusicManager.o: audio/MusicManager.cpp
+	$(CC) $(CFLAGS) audio/MusicManager.cpp -o $@
 
-SoundManager.o:
-	$(CC) $(CFLAGS) audio/SoundManager.cpp -o $(OUTPUT)$@
+$(OUTPUT)SoundManager.o: audio/SoundManager.cpp
+	$(CC) $(CFLAGS) audio/SoundManager.cpp -o $@
 	
-Entity.o:
-	$(CC) $(CFLAGS) entities/Entity.cpp -o $(OUTPUT)$@
+$(OUTPUT)Entity.o: entities/Entity.cpp
+	$(CC) $(CFLAGS) entities/Entity.cpp -o $@
 	
-Mob.o:
-	$(CC) $(CFLAGS) entities/Mob.cpp -o $(OUTPUT)$@
+$(OUTPUT)Mob.o: entities/Mob.cpp
+	$(CC) $(CFLAGS) entities/Mob.cpp -o $@
 	
-Player.o:
-	$(CC) $(CFLAGS) entities/Player.cpp -o $(OUTPUT)$@
+$(OUTPUT)Player.o: entities/Player.cpp
+	$(CC) $(CFLAGS) entities/Player.cpp -o $@
 
 .PHONY: clean_all
 clean_all: clean clean_win32 clean_exec
