@@ -11,15 +11,17 @@
 #define HEIGHT 720
 #define TITLE "LD36 Test"
 
-void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
+void update(GameStateManager* manager, Level* level, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
 
 	if(*doUpdate){
 	 //manager->update(dt);
+	 level->update(dt);
 	 *doUpdate = false;
 	}
 
 	manager->getWindow()->clear();
 	//manager->render();
+	level->render();
 	manager->getWindow()->draw(fps);
 	manager->getWindow()->draw(ups);
 	manager->getWindow()->display();
@@ -30,6 +32,7 @@ int main(int argc, char const *argv[])
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(false);
 	GameStateManager manager(&window);
+	Level level("assets/levels/level01.txt", &window);
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
@@ -94,7 +97,7 @@ int main(int argc, char const *argv[])
 		ups.setString(ups_text);
 		ups.setColor(sf::Color::White);
 
-		update(&manager, fps, ups, &doUpdate, dt);
+		update(&manager, &level, fps, ups, &doUpdate, dt);
 		if(dt >= MS) 
 			dt -= MS;
 		frames++;
