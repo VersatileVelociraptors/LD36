@@ -18,7 +18,7 @@ Level::Level(char *path, sf::RenderWindow *window){
 	yOffset = -getHeightInPixels()/2;
 
 	this->soundManager = new SoundManager(this->window);
-	//soundManager->addAllSoundInAssets();
+	soundManager->addAllSoundInAssets();
 }
 
 Level::~Level(){

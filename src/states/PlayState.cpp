@@ -2,7 +2,7 @@
 
 PlayState::PlayState(sf::RenderWindow* window){
 	this->window = window;
-	this->level = new Level("assets/levels/level01.txt", window);
+	this->level = new Level("assets/levels/level02.txt", window);
 }
 
 PlayState::~PlayState(){

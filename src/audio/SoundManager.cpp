@@ -50,7 +50,7 @@ void SoundManager::addAllSoundInAssets(){
 		}
 		closedir(dir);
 	} else {
-		std::cout << "Error opening directory " << this->ASSETS_MUSIC_PATH << std::endl;
+		std::cout << "Error opening directory " << this->ASSETS_SOUND_PATH << std::endl;
 		window->close();
 	}
 
