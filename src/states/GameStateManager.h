@@ -5,7 +5,6 @@
 #include "State.h"
 #include "../audio/MusicManager.h"
 
-#include <stack>
 #include <SFML/Graphics.hpp>
 
 class GameStateManager
@@ -17,14 +16,14 @@ public:
 	void set(int state);
 	void push(int state);
 	void pop();
-	State* peek();
 	void render();
 	void update(float dt);
 	sf::RenderWindow* getWindow();
 	MusicManager* getMusicManager();
+	State* getCurrentState();
 
 private:
-	std::stack<State*> states;
+	State* currentState;
 	sf::RenderWindow *window;
 	MusicManager *musicManager;
 	

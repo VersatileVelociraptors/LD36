@@ -1,35 +1,20 @@
 #include "GameStateManager.h"
-#include <iostream>
 
 GameStateManager::GameStateManager(sf::RenderWindow *window){
 	this->window = window;
 }
 
 GameStateManager::~GameStateManager(){
-	delete peek();
+	delete currentState;
 	delete musicManager;
 }
 
-void GameStateManager::set(int state){
-	push(state);
-}
-
-void GameStateManager::push(int state){}
-
-void GameStateManager::pop(){
-	states.pop();
-}
-
-State* GameStateManager::peek(){
-	return states.top();
-}
-
 void GameStateManager::render(){
-	peek()->render();
+	getCurrentState()->render();
 }
 
 void GameStateManager::update(float dt){
-	peek()->update(dt);
+	getCurrentState()->update(dt);
 }
 
 sf::RenderWindow* GameStateManager::getWindow(){
@@ -38,4 +23,12 @@ sf::RenderWindow* GameStateManager::getWindow(){
 
 MusicManager* GameStateManager::getMusicManager(){
 	return this->musicManager;
+}
+
+State* GameStateManager::getCurrentState(){
+	return currentState;
+}
+
+void GameStateManager::setCurrentState(State* state){
+	currentState = state;
 }
