@@ -37,6 +37,14 @@ public:
 	sf::RenderWindow* getWindow();
 	SoundManager* getSoundManager();
 
+
+	// new code
+
+	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
+	bool tile_solid_grid(int x, int y);
+
+	sf::Font font;
+
 private:
 	sf::RenderWindow *window;
 	int width, height;

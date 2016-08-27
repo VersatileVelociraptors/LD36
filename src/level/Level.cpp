@@ -5,6 +5,8 @@
 
 #include "Level.hpp"
 
+#include <string>//for testing
+
 using std::ifstream;
 using std::string;
 using std::vector;
@@ -13,12 +15,24 @@ Level::Level(char *path, sf::RenderWindow *window){
 	this->window = window;
 	tiles = new Tile(window);
 	loadLevel(path);
-
 	xOffset = -getWidthInPixels()/2;
 	yOffset = -getHeightInPixels()/2;
 
+
+	xOffset = 0;
+	yOffset = 0;
+
+
+
+
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
+
+	//for testing purposes
+
+	if (!font.loadFromFile("assets/fonts/arial.ttf"))
+		window->close();
+
 }
 
 Level::~Level(){
@@ -76,7 +90,7 @@ void Level::loadLevel(char *path){
 void Level::update(float dt){
 	player->update(dt);
 }
-
+/*
 void Level::render(){
 	int xp, yp;// player's position
 	for(int i = 0; i < width * height; ++i){
@@ -85,8 +99,7 @@ void Level::render(){
 		if(xp + TILE_SIZE < 0 || xp >= (int) window->getSize().x) continue;
 		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
 		tiles->render(tileMap[i], xp, yp);// render the tile
-	}
-}
+}*/
 
 bool Level::inSolid(int x, int y){
 	return (tileType(x,y) == WALL_TILE);
@@ -99,6 +112,7 @@ int Level::tileType(int x, int y){
 	else
 		return tileMap[index];
 }
+
 
 vector<sf::Vector2i> Level::getWalls(){
 	vector<sf::Vector2i> indicies;
@@ -149,4 +163,48 @@ sf::RenderWindow* Level::getWindow(){
 
 SoundManager* Level::getSoundManager(){
 	return this->soundManager;
+}
+
+
+
+// new code
+
+
+int Level::tile_type_grid(int x, int y){
+	int index = (y * width) + x;
+	if(index < 0 || index >= width * height)
+		return -1;
+	else
+		return tileMap[index];
+}
+
+bool Level::tile_solid_grid(int x, int y){
+	return (tile_type_grid(x,y)==WALL_TILE);
+}
+
+
+
+void Level::render(){
+	int xp, yp;// player's position
+	for(int i = 0; i < width * height; ++i){
+		xp = TILE_SIZE*(i%width) + xOffset;
+		yp = TILE_SIZE*(i/width) + yOffset;
+		if(xp + TILE_SIZE < 0 || xp >= (int) window->getSize().x) continue;
+		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
+		tiles->render(tileMap[i], xp, yp);// render the tile
+
+
+
+		//for testing
+
+		string coordinate_string="";
+		coordinate_string+=std::to_string(i%width)+", "+std::to_string(i/width);
+		sf::Text coordinates;
+		coordinates.setFont(font);
+		coordinates.setCharacterSize(12);
+		coordinates.setPosition(xp, yp);
+		coordinates.setString(coordinate_string);
+		coordinates.setColor(sf::Color::White);
+		window->draw(coordinates);
+	}
 }

@@ -32,6 +32,7 @@ void Tile::offset(int x, int y){
 }
 
 void Tile::render(int texture, int x, int y){
+
 	sf::Sprite sprite(textures[texture]);
 	sprite.setPosition(x, y);
 	window->draw(sprite);

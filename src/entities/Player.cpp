@@ -33,18 +33,18 @@ void Player::init(){
 	walls = level->getWalls();
 	sf::IntRect texture_rect = this->getTextureRect();
 	this->setOrigin(texture_rect.width/2, texture_rect.height/2);
-	this->setScale(1.0f, -1.0f);
+	this->setScale(1.0f, 1.0f);
 }
-
+/*
 void Player::move(int x, int y){
 	level->setXOffset(level->getXOffset() + x);
 	level->setYOffset(level->getYOffset() + y);
 }
-
+*/
 int Player::getDir(){
 	return dir;
 }
-
+/*
 void Player::update(float dt){
 
 	// move around with keyboard input
@@ -147,4 +147,111 @@ void Player::update(float dt){
 	}
 	
 	box_timer++;
+}*/
+
+
+
+// new stuff
+
+void Player::set_true(int x, int y){
+	true_x=x;
+	true_y=y;
+}
+
+void Player::set_grid(){
+	grid_x=(true_x*1.0/TILE_SIZE);
+	grid_y=(true_y*1.0/TILE_SIZE);
+}
+
+sf::Vector2i Player::get_grid(){
+	sf::Vector2i value(grid_x,grid_y);
+	return value;
+}
+
+sf::Vector2i Player::get_true(){
+	sf::Vector2i value(true_x,true_y);
+	return value;
+}
+
+
+//overwritten stuff
+
+void Player::update(float dt){
+
+
+	dir =0;
+	set_grid();
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+		this->setScale(-1,1);
+		dir = -1;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+		this->setScale(1,1);
+		dir = 1;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+		dir = -2;
+	}
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+		dir = 2;
+	}
+	if(dir!=0){
+		if(dir==-1){
+			if(level->tile_solid_grid(get_grid().x-1,get_grid().y)){
+				if(true_x-PLAYER_WIDTH<=(get_grid().x)*TILE_SIZE){
+
+				}else{
+					move(speed, 0);
+				}
+			}else{
+				move(speed,0);
+			}	
+		}
+		if(dir==1){
+			if(level->tile_solid_grid(get_grid().x+1,get_grid().y)){
+				if(true_x+PLAYER_WIDTH>=(get_grid().x+1)*TILE_SIZE){
+
+				}else{
+					move(-speed, 0);
+				}
+
+			}else{
+				move(-speed,0);
+			}	
+		}
+		if(dir==-2){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y-1)){
+				if(true_y-PLAYER_HEIGHT<=(get_grid().y)*TILE_SIZE){
+
+				}else{
+					move(0,speed);
+				}
+
+			}else{
+				move(0,speed);
+			}	
+		}
+		if(dir==2){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y+1) ){
+				if(true_y+PLAYER_HEIGHT>=(get_grid().y+1)*TILE_SIZE){
+
+				}else{
+					move(0, -speed);
+				}
+
+			}else{
+				move(0, -speed);
+			}	
+		}
+	}
+	
+	box_timer++;
+}
+
+
+void Player::move(int x, int y){
+	level->setXOffset(level->getXOffset() + x);
+	level->setYOffset(level->getYOffset() + y);
+	set_true(get_true().x-x, get_true().y-y);
 }
