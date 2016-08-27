@@ -3,7 +3,7 @@
 
 
 #include "State.hpp"
-#include "../audio/MusicManager.h"
+#include "../audio/MusicManager.hpp"
 
 #include <SFML/Graphics.hpp>
 

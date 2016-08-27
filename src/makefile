@@ -7,6 +7,7 @@ WINDOWS_OUTPUT=win32_build/
 LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
 OBJ= main.o
+OBJ+= Tile.o Level.o
 OBJ+= GameStateManager.o EndState.o MenuState.o PlayState.o
 OBJ+= AudioManager.o MusicManager.o SoundManager.o
 EXEC_FILE= LD36Test
@@ -53,6 +54,12 @@ $(EXEC_FILE).exe: $(OBJ)
 
 main.o:
 	$(CC) $(CFLAGS) main.cpp -o $(OUTPUT)$@
+
+Tile.o:
+	$(CC) $(CFLAGS) level/Tile.cpp -o $(OUTPUT)$@
+
+Level.o:
+	$(CC) $(CFLAGS) level/Level.cpp -o $(OUTPUT)$@
 
 GameStateManager.o:
 	$(CC) $(CFLAGS) states/GameStateManager.cpp -o $(OUTPUT)$@
