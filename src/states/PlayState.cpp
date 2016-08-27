@@ -9,12 +9,13 @@ PlayState::PlayState(sf::RenderWindow* window){
 	std::string str = "assets/levels/level02.txt";
 	char cstr[str.length() - 1];
 	std::strcpy(cstr, str.c_str());
-	this->level = new Level(cstr, window);
-	
-	Player* player = new Player(level);
+	Player* player = new Player();
 	player->setPosition((int) window->getSize().x/2, (int) window->getSize().y/2);
 	player->set_true((int) window->getSize().x/2,(int) window->getSize().y/2);
-	level->setPlayer(player);
+	this->level = new Level(cstr, window, player);
+	
+	player->setLevel(level);
+	player->init();
 }
 
 PlayState::~PlayState(){

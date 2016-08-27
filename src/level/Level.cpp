@@ -9,19 +9,13 @@ using std::ifstream;
 using std::string;
 using std::vector;
 
-Level::Level(char *path, sf::RenderWindow *window){
+Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	this->window = window;
 	tiles = new Tile(window);
 	loadLevel(path);
-	xOffset = -getWidthInPixels()/2;
-	yOffset = -getHeightInPixels()/2;
+	setPlayer(player);
 
-
-	xOffset = 0;
-	yOffset = 0;
-
-
-
+	positionPlayer(2560, 2560);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -247,6 +241,13 @@ int Level::getWidthInTiles(){
 
 int Level::getHeightInTiles(){
 	return height;
+}
+
+void Level::positionPlayer(int x, int y){
+
+	player->set_true(x, y);
+	this->xOffset = player->getPosition().x - x;
+	this->yOffset = player->getPosition().y - y;
 }
 
 int Level::getXOffset(){

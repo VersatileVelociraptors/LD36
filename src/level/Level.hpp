@@ -17,7 +17,7 @@
 class Level
 {
 public:
-	Level(char* path, sf::RenderWindow *window);
+	Level(char* path, sf::RenderWindow *window, Player *player);
 	~Level();
 	int getXOffset();
 	int getYOffset();
@@ -35,6 +35,7 @@ public:
 	int getHeightInPixels();
 	int getWidthInTiles();
 	int getHeightInTiles();
+	void positionPlayer(int x, int y);
 	Player* getPlayer();
 	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
@@ -56,7 +57,7 @@ private:
 	int *tileMap;
 	int *sublevelA;
 	int *sublevelB;
-	int xOffset, yOffset;
+	int xOffset = 0, yOffset = 0;
 	Tile *tiles;
 	Player *player;
 	sf::Clock clock;
