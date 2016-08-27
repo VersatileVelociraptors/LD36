@@ -9,10 +9,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "Tile.hpp"
-//#include "../entities/Player.h"
+#include "../entities/Player.hpp"
 #include "../audio/SoundManager.hpp"
-
-//class Player;
 
 class Level
 {
@@ -34,8 +32,8 @@ public:
 	int getHeightInPixels();
 	int getWidthInTiles();
 	int getHeightInTiles();
-//	Player* getPlayer();
-//	void setPlayer(Player *player);
+	Player* getPlayer();
+	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
 	SoundManager* getSoundManager();
 
@@ -45,7 +43,7 @@ private:
 	int *tileMap;
 	int xOffset, yOffset;
 	Tile *tiles;
-//	Player *player;
+	Player *player;
 	sf::Clock clock;
 	SoundManager *soundManager;
 

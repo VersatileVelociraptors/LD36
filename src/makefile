@@ -10,6 +10,7 @@ OBJ= main.o
 OBJ+= Tile.o Level.o
 OBJ+= GameStateManager.o State.o EndState.o MenuState.o PlayState.o
 OBJ+= AudioManager.o MusicManager.o SoundManager.o
+OBJ+= Entity.o Mob.o Player.o
 EXEC_FILE= LD36Test
 LINK= -o $(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
@@ -84,6 +85,15 @@ MusicManager.o:
 
 SoundManager.o:
 	$(CC) $(CFLAGS) audio/SoundManager.cpp -o $(OUTPUT)$@
+	
+Entity.o:
+	$(CC) $(CFLAGS) entities/Entity.cpp -o $(OUTPUT)$@
+	
+Mob.o:
+	$(CC) $(CFLAGS) entities/Mob.cpp -o $(OUTPUT)$@
+	
+Player.o:
+	$(CC) $(CFLAGS) entities/Player.cpp -o $(OUTPUT)$@
 
 .PHONY: clean_all
 clean_all: clean clean_win32 clean_exec

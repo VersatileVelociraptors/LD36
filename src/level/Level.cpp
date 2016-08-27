@@ -22,7 +22,6 @@ Level::Level(char *path, sf::RenderWindow *window){
 }
 
 Level::~Level(){
-
 	delete[] tileMap;
 	delete tiles;
 	delete soundManager;
@@ -58,8 +57,11 @@ void Level::loadLevel(char *path){
 	width = atoi(line.substr(line.find("=")+1).c_str());
 	height = atoi(line.substr(line.find("=")+1).c_str());
 
+	// read in tiles for map
 	tileMap = new int[width * height];
-	while(line.find("data=") == string::npos){std::getline(level, line);}
+	while(line.find("data=") == string::npos){
+		std::getline(level, line);
+	}
 	std::getline(level, line);
 	
 	for (int i = 0; i < height; ++i){
@@ -69,25 +71,14 @@ void Level::loadLevel(char *path){
 
 		std::getline(level, line);
 	}
-		level.close();
-
 }
 
 void Level::update(float dt){
-	//player->update(dt);
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		xOffset+=10;
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		xOffset-=10;
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		yOffset+=10;
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		yOffset-=10;
-
+	player->update(dt);
 }
 
 void Level::render(){
-	int xp, yp;
+	int xp, yp;// player's position
 	for(int i = 0; i < width * height; ++i){
 		xp = TILE_SIZE*(i%width) + xOffset;
 		yp = TILE_SIZE*(i/width) + yOffset;
@@ -95,7 +86,6 @@ void Level::render(){
 		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
 		tiles->render(tileMap[i], xp, yp);// render the tile
 	}
-
 }
 
 bool Level::inSolid(int x, int y){
@@ -145,16 +135,13 @@ int Level::getHeightInTiles(){
 	return height;
 }
 
-/*Player* Level::getPlayer(){
+Player* Level::getPlayer(){
 	return this->player;
 }
 
 void Level::setPlayer(Player *player){
 	this->player = player;
 }
-*/
-//vector<Weapon.Projectile> Level::getProjectiles();
-
 
 sf::RenderWindow* Level::getWindow(){
 	return this->window;
