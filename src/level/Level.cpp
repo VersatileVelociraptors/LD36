@@ -84,7 +84,12 @@ void Level::render(){
 		yp = TILE_SIZE*(i/width) + yOffset;
 		if(xp + TILE_SIZE < 0 || xp >= (int) window->getSize().x) continue;
 		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
-		tiles->render(tileMap[i], xp, yp);// render the tile
+		int tileNumber = tileMap[i];
+		if (changedDimension) {
+			// increment by number of normal tile types to use alternate tile textures
+			tileNumber += TILE_TYPES;
+		}
+		tiles->render(tileNumber, xp, yp);// render the tile
 	}
 }
 
@@ -117,6 +122,10 @@ sf::Vector2i Level::getTileCoordinates(int index){
 	position.x = x*TILE_SIZE-xOffset;
 	position.y = y*TILE_SIZE-yOffset;
 	return position;
+}
+
+void Level::changeDimensions(){
+	changedDimension = !changedDimension;
 }
 
 int Level::getWidthInPixels(){

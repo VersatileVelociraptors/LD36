@@ -9,12 +9,13 @@
 #include <SFML/Graphics.hpp>
 
 #define TILE_SIZE 64
+#define TILE_TYPES 6
 #define GRASS_TILE 0
-#define DIRT_TILE 1 
-#define FLOOR_TILE 2 
-#define WALL_TILE 3 
-#define BOX_TILE 4 
-#define SNOOP_TILE 5 
+#define DIRT_TILE 1
+#define FLOOR_TILE 2
+#define WALL_TILE 3
+#define BOX_TILE 4
+#define SNOOP_TILE 5
 
 class Tile
 {
@@ -25,7 +26,7 @@ public:
 	void render(int texture, int x, int y);
 private:
 	sf::RenderWindow *window;
-	sf::Texture textures[6];
+	sf::Texture textures[12];
 	int xOffset, yOffset;
 };
 

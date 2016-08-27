@@ -22,12 +22,12 @@ public:
 	void update(float dt);
 	void setLevel(Level *level);
 	void init();
+
 private:
 	sf::RenderWindow *window;
 	std::vector<sf::Vector2i> walls;
 	int dir;
-	int timer;
-	int box_timer;
+	int dimension_timer = 0;
 	
 };
 

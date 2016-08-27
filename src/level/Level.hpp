@@ -36,6 +36,7 @@ public:
 	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
 	SoundManager* getSoundManager();
+	void changeDimensions();
 
 private:
 	sf::RenderWindow *window;
@@ -46,7 +47,7 @@ private:
 	Player *player;
 	sf::Clock clock;
 	SoundManager *soundManager;
-
+	bool changedDimension = false;
 	
 };
 
