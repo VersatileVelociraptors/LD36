@@ -1,4 +1,4 @@
-#include "SoundManager.h"
+#include "SoundManager.hpp"
 
 #ifdef _WIN32
 #include "../dirent/dirent.h"
