@@ -6,6 +6,7 @@
 #include "audio/SoundManager.hpp"
 #include "level/Level.hpp"
 #include <iostream>
+#include <cstring>
 
 #define WIDTH 1280
 #define HEIGHT 720
@@ -32,7 +33,10 @@ int main(int argc, char const *argv[])
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(false);
 	GameStateManager manager(&window);
-	Level level("assets/levels/level01.txt", &window);
+	std::string levelString = "assets/levels/level01.txt";
+	char levelCString [levelString.length() - 1];
+	std::strcpy(levelCString, levelString.c_str());
+	Level level(levelCString, &window);
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
@@ -69,7 +73,7 @@ int main(int argc, char const *argv[])
 			frames = 0;
 
 			UPS = updates;
-			updates = 0; 
+			updates = 0;
 		}
 
 		dt += currentTime.asMicroseconds() - upsLastTime.asMicroseconds();
@@ -98,11 +102,11 @@ int main(int argc, char const *argv[])
 		ups.setColor(sf::Color::White);
 
 		update(&manager, &level, fps, ups, &doUpdate, dt);
-		if(dt >= MS) 
+		if(dt >= MS)
 			dt -= MS;
 		frames++;
 	}
 	manager.getMusicManager()->stop();
-
+	
 	return 0;
 }
