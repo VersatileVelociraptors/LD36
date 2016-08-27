@@ -5,16 +5,32 @@
 
 #include "Level.hpp"
 
+using std::ifstream;
+using std::string;
+using std::vector;
+
 Level::Level(char *path, sf::RenderWindow *window){
 	this->window = window;
 	tiles = new Tile(window);
 	loadLevel(path);
-
 	xOffset = -getWidthInPixels()/2;
 	yOffset = -getHeightInPixels()/2;
 
+
+	xOffset = 0;
+	yOffset = 0;
+
+
+
+
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
+
+	//for testing purposes
+
+	if (!font.loadFromFile("assets/fonts/arial.ttf"))
+		window->close();
+
 }
 
 Level::~Level(){
@@ -106,6 +122,18 @@ void Level::render(){
 			tileNumber += TILE_TYPES;
 		}
 		tiles->render(tileNumber, xp, yp);// render the tile
+		
+		//for testing
+	
+		string coordinate_string="";
+		coordinate_string+=std::to_string(i%width)+", "+std::to_string(i/width);
+		sf::Text coordinates;
+		coordinates.setFont(font);
+		coordinates.setCharacterSize(12);
+		coordinates.setPosition(xp, yp);
+		coordinates.setString(coordinate_string);
+		coordinates.setColor(sf::Color::White);
+		window->draw(coordinates);
 	}
 }
 
@@ -137,6 +165,16 @@ int Level::tileType(int x, int y){
 		return tileMap[index];
 }
 
+sf::Vector2i Level::getTileCoordinates(int index){
+	sf::Vector2i position;
+	int x = index%width;
+	int y = index/width;
+
+	position.x = x*TILE_SIZE-xOffset;
+	position.y = y*TILE_SIZE-yOffset;
+	return position;
+}
+
 /// find map index of a tile based on its position
 int Level::tileIndex(sf::Vector2i position){
 	return tileIndex(position.x, position.y);
@@ -144,6 +182,15 @@ int Level::tileIndex(sf::Vector2i position){
 
 int Level::tileIndex(int xPosition, int yPosition){
 	return (xPosition - xOffset) / TILE_SIZE % width + (yPosition - yOffset) / TILE_SIZE * width;
+}
+
+vector<sf::Vector2i> Level::getWalls(){
+	vector<sf::Vector2i> indicies;
+	for(int i = 0; i < width * height; i++){
+		if(tileMap[i] == WALL_TILE)
+			indicies.push_back(getTileCoordinates(i));
+	}
+	return indicies;
 }
 
 /// return array for current sublevel
@@ -202,4 +249,18 @@ sf::RenderWindow* Level::getWindow(){
 
 SoundManager* Level::getSoundManager(){
 	return this->soundManager;
+}
+
+// grid based collision
+
+int Level::tile_type_grid(int x, int y){
+	int index = (y * width) + x;
+	if(index < 0 || index >= width * height)
+		return -1;
+	else
+		return tileMap[index];
+}
+
+bool Level::tile_solid_grid(int x, int y){
+	return (tile_type_grid(x,y)==WALL_TILE);
 }

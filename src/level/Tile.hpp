@@ -8,8 +8,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#define TILE_SIZE 64
 #define TILE_TYPES 6
+#define TILE_SIZE 128
+
 #define GRASS_TILE 0
 #define DIRT_TILE 1
 #define FLOOR_TILE 2
@@ -24,10 +25,12 @@ public:
 	~Tile();
 	void offset(int x, int y);
 	void render(int texture, int x, int y);
+
 private:
 	sf::RenderWindow *window;
 	sf::Texture textures[12];
 	int xOffset, yOffset;
+
 };
 
 #endif //TILE_HPP
