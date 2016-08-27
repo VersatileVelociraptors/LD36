@@ -5,6 +5,8 @@ GameStateManager::GameStateManager(sf::RenderWindow *window){
 	this->window = window;
 
 	playState = new PlayState(window);
+	musicManager = new MusicManager(window);
+	musicManager->addAllMusicInAssets();
 
 }
 
