@@ -7,7 +7,7 @@ WINDOWS_OUTPUT=win32_build/
 LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
 OBJ= main.o
-OBJ+= State.o GameStateManager.o
+OBJ+= GameStateManager.o EndState.o MenuState.o PlayState.o
 OBJ+= AudioManager.o MusicManager.o SoundManager.o
 EXEC_FILE= LD36Test
 LINK= -o $(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
@@ -57,11 +57,14 @@ main.o:
 GameStateManager.o:
 	$(CC) $(CFLAGS) states/GameStateManager.cpp -o $(OUTPUT)$@
 
-State.o:
-	$(CC) $(CFLAGS) states/State.cpp -o $(OUTPUT)$@
+EndState.o:
+	$(CC) $(CFLAGS) states/EndState.cpp -o $(OUTPUT)$@
 
-MainMenuState.o:
-	$(CC) $(CFLAGS) states/MainMenuState.cpp -o $(OUTPUT)$@
+MenuState.o:
+	$(CC) $(CFLAGS) states/MenuState.cpp -o $(OUTPUT)$@
+
+PlayState.o:
+	$(CC) $(CFLAGS) states/PlayState.cpp -o $(OUTPUT)$@
 
 AudioManager.o:
 	$(CC) $(CFLAGS) audio/AudioManager.cpp -o $(OUTPUT)$@

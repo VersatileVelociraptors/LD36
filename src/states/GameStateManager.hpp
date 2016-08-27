@@ -1,14 +1,14 @@
-#ifndef GAMESTATEMANAGER_H
-#define GAMESTATEMANAGER_H
+#ifndef GAMESTATEMANAGER_HPP
+#define GAMESTATEMANAGER_HPP
 
 
-#include "State.h"
+#include "State.hpp"
 #include "../audio/MusicManager.h"
 
 #include <SFML/Graphics.hpp>
 
 enum StateEnumeration {
-	MENU, PLAY, END;
+	MENU, PLAY, END
 };
 
 class GameStateManager
@@ -32,5 +32,4 @@ private:
 	
 };
 
-
-#endif //GAMESTATEMANAGER_H
+#endif //GAMESTATEMANAGER_HPP

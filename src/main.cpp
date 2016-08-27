@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "states/GameStateManager.h"
+#include "states/GameStateManager.hpp"
 #include "audio/SoundManager.h"
 #include <iostream>
 
@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
 			frames = 0;
 
 			UPS = updates;
-			updates = 0; 
+			updates = 0;
 		}
 
 		dt += currentTime.asMicroseconds() - upsLastTime.asMicroseconds();
@@ -94,7 +94,7 @@ int main(int argc, char const *argv[])
 		ups.setColor(sf::Color::White);
 
 		update(&manager, fps, ups, &doUpdate, dt);
-		if(dt >= MS) 
+		if(dt >= MS)
 			dt -= MS;
 		frames++;
 	}
