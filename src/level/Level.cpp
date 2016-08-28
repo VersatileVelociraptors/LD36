@@ -15,7 +15,7 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	loadLevel(path);
 	setPlayer(player);
 
-	positionPlayer(2560, 2580);
+	positionPlayer(0*TILE_SIZE, 14*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -58,6 +58,7 @@ void Level::loadLevel(char *path){
 	std::getline(level, line);
 	std::getline(level, line);
 	width = atoi(line.substr(line.find("=")+1).c_str());
+	std::getline(level, line);
 	height = atoi(line.substr(line.find("=")+1).c_str());
 
 	// read in tiles for map
@@ -78,17 +79,18 @@ void Level::loadFlareMapText(std::string fileName, int *map, bool alternateDimen
 	std::getline(stream, line);
 	std::getline(stream, line);
 	int mapWidth = atoi(line.substr(line.find("=")+1).c_str());
+	std::getline(stream, line);
 	int mapHeight = atoi(line.substr(line.find("=")+1).c_str());
 	
 	while(line.find("data=") == std::string::npos){
 		std::getline(stream, line);
 	}
 	std::getline(stream, line);
-	
 	for (int i = 0; i < mapHeight; ++i){
 		for (int j = 0; j < mapWidth*2; j+=2){
 			int value = atoi(&line.at(j)) -1;
 			int index = i * mapWidth + j/2;
+			//std::cout << "test"
 			map[index] = value;
 			if (alternateDimension) {
 				map[index] += TILE_TYPES;
