@@ -143,8 +143,10 @@ void Level::render(){
 			int *sublevel = currentSublevelMap();// sub level B tile after change
 			tileNumber = sublevel[changingTileIndex++];
 		} else if (changedDimension) {
-			// increment by number of normal tile types to use alternate tile textures
-			tileNumber += TILE_TYPES;
+			if(tileNumber!=-1){
+				// increment by number of normal tile types to use alternate tile textures
+				tileNumber += TILE_TYPES;
+			}
 		}
 		tiles->render(tileNumber, xp, yp);// render the tile
 		

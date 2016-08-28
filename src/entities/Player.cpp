@@ -23,7 +23,7 @@ void Player::setLevel(Level *level){
 
 void Player::init(){
 	this->window = level->getWindow();
-	if(!this->texture.loadFromFile("assets/images/pizzaplayer.png"))
+	if(!this->texture.loadFromFile("assets/images/player.png"))
 		level->getWindow()->close();
 	
 	this->setTexture(this->texture);
