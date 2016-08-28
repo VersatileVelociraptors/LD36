@@ -11,7 +11,6 @@ PlayState::PlayState(sf::RenderWindow* window){
 	std::strcpy(cstr, str.c_str());
 	Player* player = new Player();
 	player->setPosition((int) window->getSize().x/2, (int) window->getSize().y/2);
-	player->set_true((int) window->getSize().x/2,(int) window->getSize().y/2);
 	this->level = new Level(cstr, window, player);
 	
 	player->setLevel(level);

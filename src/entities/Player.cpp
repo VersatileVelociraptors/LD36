@@ -77,10 +77,10 @@ void Player::update(float dt){
 	
 	// interact with switches
 	if (level->tile_type_grid(get_grid().x, get_grid().y) == OFF_SWITCH_TILE &&
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !switchHeld){
+			sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !switchHeld){
 		level->switchStates()[0] = !level->switchStates()[0];// toggle state of switch
 	}
-	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::E);
 
 	// keyboard input for movement
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){

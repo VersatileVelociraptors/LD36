@@ -12,10 +12,7 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[TEMPLE_FLOOR].loadFromFile("assets/images/Temple_floor.png"))
 		this->window->close();
 
-	if(!textures[TEMPLE_WALL].loadFromFile("assets/images/Temple_wall.png"))
-		this->window->close();
-
-	if(!textures[TEMPLE_FILLER].loadFromFile("assets/images/Temple_filler.png"))
+	if(!textures[TEMPLE_FILLER].loadFromFile("assets/images/Temple_floor.png"))
 		this->window->close();
 
 	// textures for activated switches and doors
@@ -32,13 +29,10 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[CLOSED_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/Door_closed.png"))
 		this->window->close();
 
-	if(!textures[TEMPLE_FLOOR + TILE_TYPES].loadFromFile("assets/images/Ice_floor.png"))
+	if(!textures[TEMPLE_FLOOR + TILE_TYPES].loadFromFile("assets/images/Hot_floor.png"))
 		this->window->close();
 	
-	if(!textures[TEMPLE_FILLER + TILE_TYPES].loadFromFile("assets/images/Ice_filler.png"))
-		this->window->close();
-
-	if(!textures[TEMPLE_WALL+ TILE_TYPES].loadFromFile("assets/images/Ice_wall.png"))
+	if(!textures[TEMPLE_FILLER + TILE_TYPES].loadFromFile("assets/images/Hot_floor.png"))
 		this->window->close();
 
 	if(!textures[ON_SWITCH_TILE + TILE_TYPES].loadFromFile("assets/images/Switch_on.png"))
