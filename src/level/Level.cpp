@@ -25,6 +25,11 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
 		window->close();
 	
+	message.setFont(font);
+	message.setCharacterSize(39);
+	message.setColor(sf::Color::White);
+	changeMessage(MESSAGE_1);
+	
 	switchActivated = new bool[SWITCH_COUNT];
 	for (int i = 0; i < SWITCH_COUNT; i++) {
 		switchActivated[i] = false;
@@ -90,7 +95,6 @@ void Level::loadFlareMapText(std::string fileName, int *map, bool alternateDimen
 		for (int j = 0; j < mapWidth*2; j+=2){
 			int value = atoi(&line.at(j)) -1;
 			int index = i * mapWidth + j/2;
-			//std::cout << "test"
 			map[index] = value;
 			if (alternateDimension) {
 				map[index] += TILE_TYPES;
@@ -103,6 +107,20 @@ void Level::loadFlareMapText(std::string fileName, int *map, bool alternateDimen
 
 void Level::update(float dt){
 	player->update(dt);
+	
+	if (message.getString() != "") {
+		if (messageTimer.getElapsedTime().asSeconds() > MESSAGE_TIME){
+			if (message.getString() == MESSAGE_1){
+				changeMessage(MESSAGE_2);
+			} else if (message.getString() == MESSAGE_2){
+				message.setString("");
+			}
+		} else {
+			sf::Color messageColor = message.getColor();
+			messageColor.a = 255 - messageTimer.getElapsedTime().asMilliseconds() / MESSAGE_FADE;
+			message.setColor(messageColor);
+		}
+	}
 }
 
 void Level::render(){
@@ -130,6 +148,9 @@ void Level::render(){
 		}
 		tiles->render(tileNumber, xp, yp);// render the tile
 		
+		if (message.getString() != "")
+			window->draw(message);
+		
 		//for testing
 	
 		string coordinate_string="";
@@ -142,6 +163,12 @@ void Level::render(){
 		coordinates.setColor(sf::Color::White);
 		window->draw(coordinates);
 	}
+}
+
+void Level::changeMessage(std::string text){
+	message.setString(text);
+	message.setPosition((window->getSize().x - message.getGlobalBounds().width) / 2, window->getSize().y - 50);
+	messageTimer.restart();
 }
 
 bool Level::inSolid(int x, int y){

@@ -14,6 +14,11 @@
 
 #define SUBLEVEL_SIZE 4 // number of tiles in sublevel
 
+#define MESSAGE_TIME 4 // in seconds
+#define MESSAGE_FADE 25 // increases how quickly messages become tranparent
+#define MESSAGE_1 "Placeholder"
+#define MESSAGE_2 "The text will stay centered even if the string is long."
+
 class Level
 {
 public:
@@ -46,6 +51,7 @@ public:
 	sf::Vector2i getTileCoordinates(int index);
 	sf::Font getFont();
 	bool *switchStates();
+	void changeMessage(std::string text);
 
 	// grid based collision
 	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
@@ -65,7 +71,8 @@ private:
 	bool changedDimension = false;
 	sf::Font font;
 	bool *switchActivated;
-	
+	sf::Text message;
+	sf::Clock messageTimer;
 };
 
 #endif //LEVEL_HPP
