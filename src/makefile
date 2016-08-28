@@ -29,9 +29,6 @@ pack: linux win32
 	 cp $(LINUX_OUTPUT)$(EXEC_FILE) Linux/; cp $(WINDOWS_OUTPUT)$(EXEC_FILE).exe Windows/; \
 	 zip -r $(EXEC_FILE).zip Linux/ Windows/;
 
-.PHONY: clean_all
-clean_all: clean clean_win32 clean_exec
-
 .PHONY: clean
 clean: clean_linux clean_win32 clean_exec
 
