@@ -45,7 +45,7 @@ public:
 	std::vector<sf::Vector2i> getWalls();
 	sf::Vector2i getTileCoordinates(int index);
 	sf::Font getFont();
-
+	bool *switchStates();
 
 	// grid based collision
 	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
@@ -64,6 +64,7 @@ private:
 	SoundManager *soundManager;
 	bool changedDimension = false;
 	sf::Font font;
+	bool *switchActivated;
 	
 };
 

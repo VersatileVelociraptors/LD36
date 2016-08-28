@@ -3,10 +3,10 @@
 Tile::Tile(sf::RenderWindow *window){
 	this->window = window;
 
-	if(!textures[GRASS_TILE].loadFromFile("assets/images/grass.png"))
+	if(!textures[OFF_SWITCH_TILE].loadFromFile("assets/images/grass.png"))
 		this->window->close();
 
-	if(!textures[DIRT_TILE].loadFromFile("assets/images/dirt.png"))
+	if(!textures[CLOSED_DOOR_TILE].loadFromFile("assets/images/dirt.png"))
 		this->window->close();
 
 	if(!textures[FLOOR_TILE].loadFromFile("assets/images/floor.png"))
@@ -17,15 +17,19 @@ Tile::Tile(sf::RenderWindow *window){
 
 	if(!textures[BOX_TILE].loadFromFile("assets/images/box.png"))
 		this->window->close();
-
-	if(!textures[DIMENSION_TILE].loadFromFile("assets/images/dogg.png"))
+	
+	// textures for activated switches and doors
+	if(!textures[ON_SWITCH_TILE].loadFromFile("assets/images/dogg.png"))
+		this->window->close();
+		
+	if(!textures[OPEN_DOOR_TILE].loadFromFile("assets/images/box.png"))
 		this->window->close();
 	
 	// textures for alternate dimension
-	if(!textures[GRASS_TILE + TILE_TYPES].loadFromFile("assets/images/dirt.png"))
+	if(!textures[OFF_SWITCH_TILE + TILE_TYPES].loadFromFile("assets/images/floor.png"))
 		this->window->close();
 	
-	if(!textures[DIRT_TILE + TILE_TYPES].loadFromFile("assets/images/dogg.png"))
+	if(!textures[CLOSED_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/dogg.png"))
 		this->window->close();
 	
 	if(!textures[FLOOR_TILE + TILE_TYPES].loadFromFile("assets/images/dirt.png"))
@@ -37,7 +41,10 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[BOX_TILE + TILE_TYPES].loadFromFile("assets/images/grass.png"))
 		this->window->close();
 	
-	if(!textures[DIMENSION_TILE + TILE_TYPES].loadFromFile("assets/images/floor.png"))
+	if(!textures[ON_SWITCH_TILE + TILE_TYPES].loadFromFile("assets/images/wall.png"))
+		this->window->close();
+	
+	if(!textures[OPEN_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/grass.png"))
 		this->window->close();
 }
 

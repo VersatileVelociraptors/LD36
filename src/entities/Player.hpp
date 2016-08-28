@@ -41,6 +41,8 @@ private:
 	std::vector<sf::Vector2i> walls;
 	sf::Clock dimension_timer;
 	
+	bool switchHeld;
+	
 	// grid based collision variables
 
 	int xDirection = 0; // integer value representing the direction the player is facing

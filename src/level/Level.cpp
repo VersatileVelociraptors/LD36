@@ -24,7 +24,8 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
 		window->close();
-
+	
+	switchActivated = new bool[SWITCH_COUNT];
 }
 
 Level::~Level(){
@@ -108,6 +109,13 @@ void Level::render(){
 		if(xp + TILE_SIZE < 0 || xp >= (int) window->getSize().x) continue;
 		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
 		int tileNumber = tileMap[i];
+		if (switchStates()[0]){
+			if (tileNumber == OFF_SWITCH_TILE){
+				tileNumber = ON_SWITCH_TILE;
+			} else if (tileNumber == CLOSED_DOOR_TILE){
+				tileNumber = OPEN_DOOR_TILE;
+			}
+		}
 		if (tileNumber == DIMENSION_TILE) {
 			int *sublevel = currentSublevelMap();// sub level B tile after change
 			tileNumber = sublevel[changingTileIndex++];
@@ -225,6 +233,10 @@ int *Level::currentSublevelMap(){
 /// change the dimension the user is in
 void Level::changeDimensions(){
 	changedDimension = !changedDimension;
+}
+
+bool *Level::switchStates(){
+	return switchActivated;
 }
 
 int Level::getWidthInPixels(){
