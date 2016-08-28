@@ -16,7 +16,7 @@
 
 #define PLAYER_WIDTH 128
 #define PLAYER_HEIGHT 128
-#define GRAVITY -1
+#define GRAVITY -0.5
 #define PI 3.14159265359
 
 class Player : public Mob

@@ -78,11 +78,11 @@ void Player::update(float dt){
 	// keyboard input for movement
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		xDirection = -1;
-		rot-= ((float)speed)/PLAYER_HEIGHT*180/PI;
+		rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
 		xDirection = 1;
-		rot+= ((float)speed)/PLAYER_HEIGHT*180/PI;
+		rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
 		yDirection = -1;
@@ -115,16 +115,15 @@ void Player::update(float dt){
 
 	if(freefalling){
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-			y_velocity = 5;
+			y_velocity = 3;
 			//freefalling=true;
 		}
 		//y_velocity-=GRAVITY;
-		total_time += dts*20;
+		total_time += dts*30;
 		dy = y_velocity*total_time+0.5*GRAVITY*total_time*total_time;
-		std::cout << dy << std::endl;
 		if(dy<0){
 			if(level->tile_solid_grid(get_grid().x,get_grid().y+1)){
-				if(true_y-PLAYER_HEIGHT/2+dy<=(get_grid().y)*TILE_SIZE){
+				if(true_y-PLAYER_HEIGHT+dy<=(get_grid().y)*TILE_SIZE){
 					//freefalling=false;
 					total_time=0;
 					y_velocity = 0;
@@ -136,12 +135,12 @@ void Player::update(float dt){
 				move(0,dy);
 			}
 		}else if(dy>0){
-			if(level->tile_solid_grid(get_grid().x,get_grid().y) ){
-				if(true_y+PLAYER_HEIGHT/2+dy>=(get_grid().y)*TILE_SIZE){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y-1) ){
+				if(true_y+PLAYER_HEIGHT+dy>=(get_grid().y+0.5)*TILE_SIZE){
 					//freefalling=false;
-					total_time = 0;
+					//total_time = 0;
 					y_velocity = 0;
-					level->positionPlayer(true_x,(get_grid().y)*TILE_SIZE);
+					level->positionPlayer(true_x,(get_grid().y+0.5)*TILE_SIZE);
 				}else{
 					move(0,dy);
 				}
