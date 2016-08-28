@@ -14,10 +14,11 @@ MAKE= make -f
 export EXEC_FILE
 export CPP_FILES
 
-all: linux win32
 
 linux:
 	$(MAKE) Linux.mak
+
+all: linux win32
 
 win32:
 	$(MAKE) Windows.mak
