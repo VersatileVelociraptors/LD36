@@ -26,6 +26,9 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 		window->close();
 	
 	switchActivated = new bool[SWITCH_COUNT];
+	for (int i = 0; i < SWITCH_COUNT; i++) {
+		switchActivated[i] = false;
+	}
 }
 
 Level::~Level(){
@@ -156,7 +159,7 @@ bool Level::inSolid(int x, int y){
 			tile -= TILE_TYPES;
 		}
 	}
-	return tile == WALL_TILE;
+	return tile == WALL_TILE || (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
 int Level::tileType(int x, int y){
@@ -194,7 +197,7 @@ bool Level::tile_solid_grid(int x, int y){
 			tile -= TILE_TYPES;
 		}
 	}
-	return tile==WALL_TILE;
+	return tile==WALL_TILE || (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
 sf::Vector2i Level::getTileCoordinates(int index){
