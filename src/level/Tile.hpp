@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#define TILE_TYPES 9
+#define TILE_TYPES 6
 #define TILE_SIZE 128
 #define SWITCH_COUNT 1
 

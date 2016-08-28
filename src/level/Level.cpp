@@ -226,7 +226,7 @@ bool Level::tile_solid_grid(int x, int y){
 			tile -= TILE_TYPES;
 		}
 	}
-	return (tile==WALL_TILE || tile==TEMPLE_FLOOR || tile==TEMPLE_WALL)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
+	return (tile==WALL_TILE || tile==TEMPLE_FLOOR)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
 sf::Vector2i Level::getTileCoordinates(int index){
