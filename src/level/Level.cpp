@@ -15,7 +15,7 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	loadLevel(path);
 	setPlayer(player);
 
-	//positionPlayer(2580, 2560);
+	positionPlayer(2560, 2580);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -243,7 +243,7 @@ int Level::getHeightInTiles(){
 	return height;
 }
 
-void Level::positionPlayer(int x, int y){
+void Level::positionPlayer(float x, float y){
 
 	player->set_true(x, y);
 	this->xOffset = player->getPosition().x - x;

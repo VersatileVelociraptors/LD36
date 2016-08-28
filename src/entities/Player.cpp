@@ -23,7 +23,7 @@ void Player::setLevel(Level *level){
 
 void Player::init(){
 	this->window = level->getWindow();
-	if(!this->texture.loadFromFile("assets/images/player.png"))
+	if(!this->texture.loadFromFile("assets/images/pizzaplayer.png"))
 		level->getWindow()->close();
 	
 	this->setTexture(this->texture);
@@ -38,7 +38,7 @@ void Player::init(){
 
 // use grid based collision
 
-void Player::set_true(int x, int y){
+void Player::set_true(float x, float y){
 	true_x=x;
 	true_y=y;
 }
@@ -62,6 +62,7 @@ sf::Vector2i Player::get_true(){
 //overwritten stuff
 
 void Player::update(float dt){
+	float dts = dt/1000000.0; 
 	if (dimension_timer.getElapsedTime().asSeconds() > DIMENSION_CHANGE_DELAY &&
 			(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))) {
 		// change dimensions
@@ -76,12 +77,12 @@ void Player::update(float dt){
 
 	// keyboard input for movement
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-		this->setScale(-1,1);
 		xDirection = -1;
+		rot-= ((float)speed)/PLAYER_HEIGHT*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-		this->setScale(1,1);
-		xDirection = 1;;
+		xDirection = 1;
+		rot+= ((float)speed)/PLAYER_HEIGHT*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
 		yDirection = -1;
@@ -92,7 +93,7 @@ void Player::update(float dt){
 	
 	if(xDirection==-1){
 		if(level->tile_solid_grid(get_grid().x-1,get_grid().y)){
-			if(true_x-PLAYER_WIDTH<=(get_grid().x)*TILE_SIZE){
+			if(true_x-PLAYER_WIDTH/2<=(get_grid().x)*TILE_SIZE){
 			}else{
 				move(speed, 0);
 			}
@@ -101,7 +102,7 @@ void Player::update(float dt){
 		}
 	}else if(xDirection==1){
 		if(level->tile_solid_grid(get_grid().x+1,get_grid().y)){
-			if(true_x+PLAYER_WIDTH>=(get_grid().x+1)*TILE_SIZE){
+			if(true_x+PLAYER_WIDTH/2>=(get_grid().x+1)*TILE_SIZE){
 			}else{
 				move(-speed, 0);
 			}
@@ -113,42 +114,51 @@ void Player::update(float dt){
 
 
 	if(freefalling){
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+			y_velocity = 5;
+			//freefalling=true;
+		}
 		//y_velocity-=GRAVITY;
-
-		if(y_velocity<0){
-			if(level->tile_solid_grid(get_grid().x,get_grid().y-1)){
-				if(true_y-PLAYER_HEIGHT+y_velocity<=(get_grid().y)*TILE_SIZE){
-					freefalling=false;
-					level->positionPlayer(true_x,(get_grid().y-1)*TILE_SIZE);
+		total_time += dts*20;
+		dy = y_velocity*total_time+0.5*GRAVITY*total_time*total_time;
+		std::cout << dy << std::endl;
+		if(dy<0){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y+1)){
+				if(true_y-PLAYER_HEIGHT/2+dy<=(get_grid().y)*TILE_SIZE){
+					//freefalling=false;
+					total_time=0;
+					y_velocity = 0;
+					level->positionPlayer(true_x,(get_grid().y+0.5)*TILE_SIZE);
 				}else{
-					move(0,y_velocity);
+					move(0,dy);
 				}
 			}else{
-				move(0,y_velocity);
+				move(0,dy);
 			}
-		}else if(y_velocity>0){
-			if(level->tile_solid_grid(get_grid().x,get_grid().y+1) ){
-				if(true_y+PLAYER_HEIGHT+y_velocity>=(get_grid().y+1)*TILE_SIZE){
-					freefalling=false;
-					level->positionPlayer(true_x,get_grid().y*TILE_SIZE);
+		}else if(dy>0){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y) ){
+				if(true_y+PLAYER_HEIGHT/2+dy>=(get_grid().y)*TILE_SIZE){
+					//freefalling=false;
+					total_time = 0;
+					y_velocity = 0;
+					level->positionPlayer(true_x,(get_grid().y)*TILE_SIZE);
 				}else{
-					move(0,y_velocity);
+					move(0,dy);
 				}
 				
 			}else{
-				move(0,y_velocity);
+				move(0,dy);
 			}
 		}
 	}else{
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-			y_velocity = -10;
-			freefalling=true;
-		}
+		total_time = 0;
 	}
+
+	setRotation(rot);
 }
 
 
-void Player::move(int x, int y){
+void Player::move(float x, float y){
 	level->setXOffset(level->getXOffset() + x);
 	level->setYOffset(level->getYOffset() + y);
 	set_true(get_true().x-x, get_true().y-y);

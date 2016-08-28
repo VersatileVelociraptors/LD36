@@ -35,7 +35,7 @@ public:
 	int getHeightInPixels();
 	int getWidthInTiles();
 	int getHeightInTiles();
-	void positionPlayer(int x, int y);
+	void positionPlayer(float x, float y);
 	Player* getPlayer();
 	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
