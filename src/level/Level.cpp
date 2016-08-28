@@ -15,7 +15,7 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	loadLevel(path);
 	setPlayer(player);
 
-	positionPlayer(1*TILE_SIZE, 14*TILE_SIZE);
+	positionPlayer(1*TILE_SIZE, 3*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -226,7 +226,7 @@ bool Level::tile_solid_grid(int x, int y){
 			tile -= TILE_TYPES;
 		}
 	}
-	return tile==WALL_TILE || (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
+	return (tile==WALL_TILE || tile==TEMPLE_FLOOR || tile==TEMPLE_WALL)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
 sf::Vector2i Level::getTileCoordinates(int index){

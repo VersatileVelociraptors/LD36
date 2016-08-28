@@ -6,7 +6,7 @@
 PlayState::PlayState(sf::RenderWindow* window){
 	this->window = window;
 	
-	std::string str = "assets/levels/level01.txt";
+	std::string str = "assets/levels/test.txt";
 	char cstr[str.length() - 1];
 	std::strcpy(cstr, str.c_str());
 	Player* player = new Player();
