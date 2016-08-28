@@ -20,46 +20,46 @@ $(OUTPUT)$(EXEC_FILE).exe: win32_dir $(OBJ)
 	$(CC) $(OBJ) $(LINK)
 
 $(OUTPUT)main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)Tile.o: level/Tile.cpp
-	$(CC) $(CFLAGS) level/Tile.cpp -o$@
+	$(CC) $(CFLAGS) $< -o$@
 
 $(OUTPUT)Level.o: level/Level.cpp
-	$(CC) $(CFLAGS) level/Level.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)GameStateManager.o: states/GameStateManager.cpp
-	$(CC) $(CFLAGS) states/GameStateManager.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)State.o: states/State.cpp
-	$(CC) $(CFLAGS) states/State.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)EndState.o: states/EndState.cpp
-	$(CC) $(CFLAGS) states/EndState.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)MenuState.o: states/MenuState.cpp
-	$(CC) $(CFLAGS) states/MenuState.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)PlayState.o: states/PlayState.cpp
-	$(CC) $(CFLAGS) states/PlayState.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)AudioManager.o: audio/AudioManager.cpp
-	$(CC) $(CFLAGS) audio/AudioManager.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)MusicManager.o: audio/MusicManager.cpp
-	$(CC) $(CFLAGS) audio/MusicManager.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)SoundManager.o: audio/SoundManager.cpp
-	$(CC) $(CFLAGS) audio/SoundManager.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 	
 $(OUTPUT)Entity.o: entities/Entity.cpp
-	$(CC) $(CFLAGS) entities/Entity.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 	
 $(OUTPUT)Mob.o: entities/Mob.cpp
-	$(CC) $(CFLAGS) entities/Mob.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 	
 $(OUTPUT)Player.o: entities/Player.cpp
-	$(CC) $(CFLAGS) entities/Player.cpp -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 .PHONY: clean
 clean:
