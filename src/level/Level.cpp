@@ -15,7 +15,7 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	loadLevel(path);
 	setPlayer(player);
 
-	positionPlayer(0*TILE_SIZE, 14*TILE_SIZE);
+	positionPlayer(1*TILE_SIZE, 14*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();

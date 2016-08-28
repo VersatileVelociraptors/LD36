@@ -55,7 +55,7 @@ private:
 	int grid_x; // tile grid x value of player location
 	int grid_y; // tile grid y value of player location
 
-	int y_velocity;
+	int y_velocity = 0;
 	float dy;
 	float prevDx;
 
