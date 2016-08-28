@@ -33,6 +33,7 @@ void Player::init(){
 	sf::IntRect texture_rect = this->getTextureRect();
 	this->setOrigin(texture_rect.width/2, texture_rect.height/2);
 	this->setScale(1.0f, 1.0f);
+
 }
 
 // use grid based collision
@@ -92,7 +93,6 @@ void Player::update(float dt){
 	if(xDirection==-1){
 		if(level->tile_solid_grid(get_grid().x-1,get_grid().y)){
 			if(true_x-PLAYER_WIDTH<=(get_grid().x)*TILE_SIZE){
-				
 			}else{
 				move(speed, 0);
 			}
@@ -102,7 +102,6 @@ void Player::update(float dt){
 	}else if(xDirection==1){
 		if(level->tile_solid_grid(get_grid().x+1,get_grid().y)){
 			if(true_x+PLAYER_WIDTH>=(get_grid().x+1)*TILE_SIZE){
-				
 			}else{
 				move(-speed, 0);
 			}
@@ -111,27 +110,39 @@ void Player::update(float dt){
 			move(-speed,0);
 		}
 	}
-	if(yDirection==-1){
-		if(level->tile_solid_grid(get_grid().x,get_grid().y-1)){
-			if(true_y-PLAYER_HEIGHT<=(get_grid().y)*TILE_SIZE){
+
+
+	if(freefalling){
+		//y_velocity-=GRAVITY;
+
+		if(y_velocity<0){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y-1)){
+				if(true_y-PLAYER_HEIGHT+y_velocity<=(get_grid().y)*TILE_SIZE){
+					freefalling=false;
+					level->positionPlayer(true_x,(get_grid().y-1)*TILE_SIZE);
+				}else{
+					move(0,y_velocity);
+				}
+			}else{
+				move(0,y_velocity);
+			}
+		}else if(y_velocity>0){
+			if(level->tile_solid_grid(get_grid().x,get_grid().y+1) ){
+				if(true_y+PLAYER_HEIGHT+y_velocity>=(get_grid().y+1)*TILE_SIZE){
+					freefalling=false;
+					level->positionPlayer(true_x,get_grid().y*TILE_SIZE);
+				}else{
+					move(0,y_velocity);
+				}
 				
 			}else{
-				move(0,speed);
+				move(0,y_velocity);
 			}
-			
-		}else{
-			move(0,speed);
 		}
-	}else if(yDirection	==1){
-		if(level->tile_solid_grid(get_grid().x,get_grid().y+1) ){
-			if(true_y+PLAYER_HEIGHT>=(get_grid().y+1)*TILE_SIZE){
-				
-			}else{
-				move(0, -speed);
-			}
-			
-		}else{
-			move(0, -speed);
+	}else{
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+			y_velocity = -10;
+			freefalling=true;
 		}
 	}
 }

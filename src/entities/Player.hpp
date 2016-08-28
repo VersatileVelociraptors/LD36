@@ -16,6 +16,7 @@
 
 #define PLAYER_WIDTH 32
 #define PLAYER_HEIGHT 64
+#define GRAVITY -1
 
 class Player : public Mob
 {
@@ -35,6 +36,7 @@ public:
 	sf::Vector2i get_true();
 	void set_grid();
 	sf::Vector2i get_grid();
+
 	
 private:
 	sf::RenderWindow *window;
@@ -49,6 +51,11 @@ private:
 	int true_y; //y value of player origin relative to level 0,0
 	int grid_x; // tile grid x value of player location
 	int grid_y; // tile grid y value of player location
+
+	int y_velocity;
+
+	bool freefalling=false;
+
 };
 
 #endif //PLAYER_HPP
