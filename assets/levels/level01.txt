@@ -6,15 +6,18 @@ tileheight=128
 orientation=orthogonal
 
 [tilesets]
-tileset=../LudumDare/LD36/assets/images/Switch_off.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/Door_closed.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/Temple_floor.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/Temple_floor.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/Switch_on.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/Door_open.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/spawn_tile.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/death_tile.png,128,128,0,0
-tileset=../LudumDare/LD36/assets/images/end_tile.png,128,128,0,0
+tileset=../images/Switch_off.png,128,128,0,0
+tileset=../images/Door_closed.png,128,128,0,0
+tileset=../images/Temple_floor.png,128,128,0,0
+tileset=../images/Temple_floor.png,128,128,0,0
+tileset=../images/Switch_on.png,128,128,0,0
+tileset=../images/Door_open.png,128,128,0,0
+tileset=../images/spawn_tile.png,128,128,0,0
+tileset=../images/death_tile.png,128,128,0,0
+tileset=../images/end_tile.png,128,128,0,0
+tileset=../images/chozo_1.png,128,128,0,0
+tileset=../images/chozo_3.png,128,128,0,0
+tileset=../images/chozo_2.png,128,128,0,0
 
 [layer]
 type=Tile Layer 1
@@ -46,8 +49,8 @@ data=
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 3,3,3,3,3,3,3,0,3,3,3,3,3,0,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 3,0,0,0,0,0,0,3,0,0,0,0,0,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-3,0,0,0,0,0,0,3,0,0,0,0,0,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-3,7,0,0,0,0,0,3,0,0,0,0,0,2,0,0,0,9,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,7,0,0,0,0,0,3,0,0,0,0,0,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,0,0,0,0,0,0,3,0,0,0,0,0,2,0,0,0,9,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

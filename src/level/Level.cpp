@@ -15,7 +15,7 @@ Level::Level(sf::RenderWindow *window, Player *player){
 	loadLevel();
 	setPlayer(player);
 
-	positionPlayer(spawnTile.x*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
+	positionPlayer((spawnTile.x+1)*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -32,6 +32,9 @@ Level::Level(sf::RenderWindow *window, Player *player){
 	for (int i = 0; i < SWITCH_COUNT; i++) {
 		switchActivated[i] = false;
 	}
+
+
+
 }
 
 Level::~Level(){
@@ -144,6 +147,10 @@ void Level::render(){
 		
 		if (message.getString() != "")
 			window->draw(message);
+
+
+
+
 		
 		//for testing
 	
