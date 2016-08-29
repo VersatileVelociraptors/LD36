@@ -16,7 +16,7 @@ public:
 	PlayState(sf::RenderWindow* window);
 	~PlayState();
 	void update(float dt);
-void render();
+	void render();
 private:
 	Level* level;
 	sf::RenderWindow* window;

@@ -61,6 +61,12 @@ $(OUTPUT)Mob.o: entities/Mob.cpp
 $(OUTPUT)Player.o: entities/Player.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
+$(OUTPUT)StartButton.o: ui/StartButton.cpp
+	$(CC) $(CFLAGS) $< -o $@
+
+$(OUTPUT)ExitButton.o: ui/ExitButton.cpp
+	$(CC) $(CFLAGS) $< -o $@
+	
 .PHONY: clean
 clean:
 	rm -rf $(OUTPUT);

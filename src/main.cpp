@@ -9,7 +9,7 @@
 
 #define WIDTH 1280
 #define HEIGHT 720
-#define TITLE "LD36 Test"
+#define TITLE "Goatsie the Video Game"
 
 void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
 
@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(false);
 	GameStateManager manager(&window);
-	manager.set(PLAY);
+	manager.set(MENU);
 	
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))

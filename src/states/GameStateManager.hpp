@@ -5,8 +5,11 @@
 #include "State.hpp"
 #include "../audio/MusicManager.hpp"
 #include "PlayState.hpp"
+#include "MenuState.hpp"
 
 #include <SFML/Graphics.hpp>
+
+class MenuState;
 
 enum StateEnumeration {
 	MENU, PLAY, END
@@ -31,6 +34,7 @@ private:
 	sf::RenderWindow *window;
 	MusicManager *musicManager;
 	PlayState* playState;
+	MenuState* menuState;
 	
 };
 
