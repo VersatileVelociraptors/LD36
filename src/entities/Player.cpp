@@ -85,11 +85,9 @@ void Player::update(float dt){
 	// keyboard input for movement
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		xDirection = -1;
-		rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
 		xDirection = 1;
-		rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
 		yDirection = -1;
@@ -103,8 +101,10 @@ void Player::update(float dt){
 			if(true_x-PLAYER_WIDTH/2<=(get_grid().x)*TILE_SIZE){
 			}else{
 				move(speed, 0);
+				rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 			}
 		}else{
+			rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 			move(speed,0);
 		}
 	}else if(xDirection==1){
@@ -112,10 +112,12 @@ void Player::update(float dt){
 			if(true_x+PLAYER_WIDTH/2>=(get_grid().x+1)*TILE_SIZE){
 			}else{
 				move(-speed, 0);
+				rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 			}
 			
 		}else{
 			move(-speed,0);
+			rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 		}
 	}
 

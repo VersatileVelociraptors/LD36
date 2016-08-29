@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#define TILE_TYPES 4
+#define TILE_TYPES 8
 #define TILE_SIZE 128
 #define SWITCH_COUNT 1
 
@@ -27,8 +27,8 @@
 // not actually in level file
 #define ON_SWITCH_TILE 4
 #define OPEN_DOOR_TILE 5
-#define HOT_FLOOR 6
-#define HOT_FILLER 7
+#define DARK_FLOOR 6
+#define DARK_FILLER 7
 #define DIMENSION_TILE 8
 
 #define WALL_TILE TEMPLE_FLOOR
