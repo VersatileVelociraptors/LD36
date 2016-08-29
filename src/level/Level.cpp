@@ -134,6 +134,9 @@ void Level::render(){
 				tileNumber = OPEN_DOOR_TILE;
 			}
 		}
+		// render different textures in alternate dimension
+		if (changedDimension)
+			tileNumber += TILE_TYPES;
 		tiles->render(tileNumber, xp, yp);// render the tile
 		
 		if (message.getString() != "")
