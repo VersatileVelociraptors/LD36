@@ -54,6 +54,8 @@ public:
 	void changeMessage(std::string text);
 	sf::Vector2i getSpawnTile();
 
+	void set_changedDimension(bool cd);
+
 	// grid based collision
 	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
 	bool tile_solid_grid(int x, int y);

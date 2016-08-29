@@ -12,12 +12,9 @@ tileset=../images/Temple_floor.png,128,128,0,0
 tileset=../images/Temple_floor.png,128,128,0,0
 tileset=../images/Switch_on.png,128,128,0,0
 tileset=../images/Door_open.png,128,128,0,0
-tileset=../images/spawn_tile.png,128,128,0,0
+tileset=../images/spawn_tiled.png,128,128,0,0
 tileset=../images/death_tile.png,128,128,0,0
 tileset=../images/end_tile.png,128,128,0,0
-tileset=../images/chozo_1.png,128,128,0,0
-tileset=../images/chozo_3.png,128,128,0,0
-tileset=../images/chozo_2.png,128,128,0,0
 
 [layer]
 type=Tile Layer 1

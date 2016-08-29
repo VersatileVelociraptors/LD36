@@ -82,8 +82,10 @@ void Player::update(float dt){
 	}
 	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::E);
 
-	if(level->tile_type_grid(get_grid().x, get_grid().y) == DEATH_TILE)
-		level->positionPlayer(level->getSpawnTile().x*TILE_SIZE-PLAYER_WIDTH/2, level->getSpawnTile().y*TILE_SIZE);
+	if(level->tile_type_grid(get_grid().x, get_grid().y) == DEATH_TILE){
+		level->positionPlayer((level->getSpawnTile().x+1)*TILE_SIZE-PLAYER_WIDTH/2, level->getSpawnTile().y*TILE_SIZE);
+		level->set_changedDimension(false);
+	}
 
 	// keyboard input for movement
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){

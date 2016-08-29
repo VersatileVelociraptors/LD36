@@ -238,6 +238,10 @@ void Level::changeDimensions(){
 	changedDimension = !changedDimension;
 }
 
+void Level::set_changedDimension(bool cd){
+	changedDimension=cd;
+}
+
 bool *Level::switchStates(){
 	return switchActivated;
 }
