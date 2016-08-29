@@ -44,8 +44,8 @@ void Player::set_true(float x, float y){
 }
 
 void Player::set_grid(){
-	grid_x=(true_x*1.0/TILE_SIZE);
-	grid_y=(true_y*1.0/TILE_SIZE);
+	grid_x=(true_x/TILE_SIZE);
+	grid_y=(true_y/TILE_SIZE);
 }
 
 sf::Vector2i Player::get_grid(){
