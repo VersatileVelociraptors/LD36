@@ -30,6 +30,7 @@ public:
 	void update(float dt);
 	void setLevel(Level *level);
 	void init();
+	int currentTileType();
 
 	// grid based collision methods
 

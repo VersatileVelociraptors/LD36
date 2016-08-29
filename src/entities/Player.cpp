@@ -76,15 +76,21 @@ void Player::update(float dt){
 	set_grid();
 	
 	// interact with switches
-	if (level->tile_type_grid(get_grid().x, get_grid().y) == OFF_SWITCH_TILE &&
+	if (currentTileType() == OFF_SWITCH_TILE &&
 			sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !switchHeld){
 		level->setSwitchActivated(!level->getSwitchActivated());// toggle state of switch
 	}
 	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::E);
 
-	if(level->tile_type_grid(get_grid().x, get_grid().y) == DEATH_TILE){
-		level->positionPlayer((level->getSpawnTile().x+1)*TILE_SIZE-PLAYER_WIDTH/2, level->getSpawnTile().y*TILE_SIZE);
-		level->set_changedDimension(false);
+	if(currentTileType() == DEATH_TILE){
+		level->spawnPlayer();
+		level->setChangedDimension(false);
+		level->setSwitchActivated(false);
+	} else if (currentTileType() == END_TILE) {
+		level->loadLevel("level02");
+		level->spawnPlayer();
+		level->setChangedDimension(false);
+		level->setSwitchActivated(false);
 	}
 
 	// keyboard input for movement
@@ -170,9 +176,13 @@ void Player::update(float dt){
 	setRotation(rot);
 }
 
-
 void Player::move(float x, float y){
 	level->setXOffset(level->getXOffset() + x);
 	level->setYOffset(level->getYOffset() + y);
 	set_true(get_true().x-x, get_true().y-y);
+}
+
+/// type of tile under the player
+int Player::currentTileType(){
+	return level->tile_type_grid(get_grid().x, get_grid().y);
 }

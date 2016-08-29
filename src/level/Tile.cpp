@@ -37,7 +37,7 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[OFF_SWITCH_TILE + TILE_TYPES].loadFromFile("assets/images/Switch_off.png"))
 		this->window->close();
 	
-	if(!textures[CLOSED_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/Door_closed.png"))
+	if(!textures[CLOSED_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/Door_closed_dark.png"))
 		this->window->close();
 
 	if(!textures[TEMPLE_FLOOR + TILE_TYPES].loadFromFile("assets/images/Dark_floor.png"))
@@ -49,7 +49,7 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[ON_SWITCH_TILE + TILE_TYPES].loadFromFile("assets/images/Switch_on.png"))
 		this->window->close();
 	
-	if(!textures[OPEN_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/Door_open.png"))
+	if(!textures[OPEN_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/Door_open_dark.png"))
 		this->window->close();
 	
 	// Placeholder images
