@@ -23,7 +23,7 @@ void Player::setLevel(Level *level){
 
 void Player::init(){
 	this->window = level->getWindow();
-	if(!this->texture.loadFromFile("assets/images/pizzaplayer.png"))
+	if(!this->texture.loadFromFile("assets/images/player.png"))
 		level->getWindow()->close();
 	
 	this->setTexture(this->texture);
@@ -77,19 +77,17 @@ void Player::update(float dt){
 	
 	// interact with switches
 	if (level->tile_type_grid(get_grid().x, get_grid().y) == OFF_SWITCH_TILE &&
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !switchHeld){
+			sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !switchHeld){
 		level->switchStates()[0] = !level->switchStates()[0];// toggle state of switch
 	}
-	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::E);
 
 	// keyboard input for movement
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		xDirection = -1;
-		rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
 		xDirection = 1;
-		rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
 		yDirection = -1;
@@ -103,8 +101,10 @@ void Player::update(float dt){
 			if(true_x-PLAYER_WIDTH/2<=(get_grid().x)*TILE_SIZE){
 			}else{
 				move(speed, 0);
+				rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 			}
 		}else{
+			rot-= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 			move(speed,0);
 		}
 	}else if(xDirection==1){
@@ -112,10 +112,12 @@ void Player::update(float dt){
 			if(true_x+PLAYER_WIDTH/2>=(get_grid().x+1)*TILE_SIZE){
 			}else{
 				move(-speed, 0);
+				rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 			}
 			
 		}else{
 			move(-speed,0);
+			rot+= ((float)speed)/(PLAYER_HEIGHT/2)*180/PI;
 		}
 	}
 
