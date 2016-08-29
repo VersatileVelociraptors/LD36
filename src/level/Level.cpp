@@ -15,7 +15,7 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	loadLevel(path);
 	setPlayer(player);
 
-	positionPlayer(1*TILE_SIZE, 3*TILE_SIZE);
+	positionPlayer(1*TILE_SIZE+(PLAYER_WIDTH/2), 3*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -143,8 +143,10 @@ void Level::render(){
 			int *sublevel = currentSublevelMap();// sub level B tile after change
 			tileNumber = sublevel[changingTileIndex++];
 		} else if (changedDimension) {
-			// increment by number of normal tile types to use alternate tile textures
-			tileNumber += TILE_TYPES;
+			if(tileNumber!=-1){
+				// increment by number of normal tile types to use alternate tile textures
+				tileNumber += TILE_TYPES;
+			}
 		}
 		tiles->render(tileNumber, xp, yp);// render the tile
 		
@@ -226,7 +228,7 @@ bool Level::tile_solid_grid(int x, int y){
 			tile -= TILE_TYPES;
 		}
 	}
-	return (tile==WALL_TILE || tile==TEMPLE_FLOOR || tile==TEMPLE_WALL)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
+	return (tile==WALL_TILE || tile==TEMPLE_FLOOR)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
 sf::Vector2i Level::getTileCoordinates(int index){

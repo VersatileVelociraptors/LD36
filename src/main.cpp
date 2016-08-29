@@ -28,7 +28,9 @@ void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdat
 
 int main(int argc, char const *argv[])
 {
+	std::cout<<"fuck";
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
+	window.setPosition(sf::Vector2i(0,10));
 	window.setVerticalSyncEnabled(false);
 	GameStateManager manager(&window);
 	manager.set(MENU);
