@@ -9,18 +9,16 @@ using std::ifstream;
 using std::string;
 using std::vector;
 
-Level::Level(char *path, sf::RenderWindow *window, Player *player){
+Level::Level(sf::RenderWindow *window, Player *player){
 	this->window = window;
 	tiles = new Tile(window);
-	loadLevel(path);
+	loadLevel();
 	setPlayer(player);
 
 	positionPlayer(spawnTile.x*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
-
-	//for testing purposes
 
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
 		window->close();
@@ -38,12 +36,14 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 
 Level::~Level(){
 	delete[] tileMap;
+	delete[] alternateMap;
+	delete[] switchActivated;
 	delete tiles;
 	delete soundManager;
 }
 
-void Level::loadLevel(char *path){
-	std::ifstream level(path);
+void Level::loadLevel(){
+	std::ifstream level("assets/levels/test.txt");
 
 	if(!level){
 		window->close();
@@ -51,14 +51,6 @@ void Level::loadLevel(char *path){
 	}
 
 	std::string line;
-	
-	// load sublevel A
-	sublevelA = new int[SUBLEVEL_SIZE];
-	loadFlareMapText("assets/levels/sublevel-a.txt", sublevelA, false);
-	
-	// load sublevel B
-	sublevelB = new int[SUBLEVEL_SIZE];
-	loadFlareMapText("assets/levels/sublevel-b.txt", sublevelB, true);
 	
 	std::getline(level, line);
 	std::getline(level, line);
@@ -68,16 +60,19 @@ void Level::loadLevel(char *path){
 
 	// read in tiles for map
 	tileMap = new int[width * height];
-	loadFlareMapText(std::string(path), tileMap, false);
+	loadFlareMapText("assets/levels/test.txt", tileMap);
+	
+	// load the alternate dimension map assumed to be the same size as the normal map
+	alternateMap = new int[width * height];
+	loadFlareMapText("assets/levels/testb.txt", alternateMap);
 }
 
 /**
  * Load level map from a flare text file
  * @param fileName name of flare text file
  * @param map level map array
- * @param alternateDimension whether or not the map is a secondary sublevel
  */
-void Level::loadFlareMapText(std::string fileName, int *map, bool alternateDimension){
+void Level::loadFlareMapText(std::string fileName, int *map){
 	std::ifstream stream(fileName);
 	std::string line;
 	
@@ -100,10 +95,8 @@ void Level::loadFlareMapText(std::string fileName, int *map, bool alternateDimen
 				spawnTile.x = j;
 				spawnTile.y = i;
 			}
-			if (alternateDimension) {
-				map[index] += TILE_TYPES;
-			}
 		}
+
 		std::getline(stream, line);
 	}
 }
@@ -128,27 +121,17 @@ void Level::update(float dt){
 
 void Level::render(){
 	int xp, yp;// tile position
-	int changingTileIndex = 0;
 	for(int i = 0; i < width * height; ++i){
 		xp = TILE_SIZE*(i%width) + xOffset;
 		yp = TILE_SIZE*(i/width) + yOffset;
 		if(xp + TILE_SIZE < 0 || xp >= (int) window->getSize().x) continue;
 		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
-		int tileNumber = tileMap[i];
+		int tileNumber = currentMap()[i];
 		if (switchStates()[0]){
 			if (tileNumber == OFF_SWITCH_TILE){
 				tileNumber = ON_SWITCH_TILE;
 			} else if (tileNumber == CLOSED_DOOR_TILE){
 				tileNumber = OPEN_DOOR_TILE;
-			}
-		}
-		if (tileNumber == DIMENSION_TILE) {
-			int *sublevel = currentSublevelMap();// sub level B tile after change
-			tileNumber = sublevel[changingTileIndex++];
-		} else if (changedDimension) {
-			if(tileNumber!=-1){
-				// increment by number of normal tile types to use alternate tile textures
-				tileNumber += TILE_TYPES;
 			}
 		}
 		tiles->render(tileNumber, xp, yp);// render the tile
@@ -178,21 +161,6 @@ void Level::changeMessage(std::string text){
 
 bool Level::inSolid(int x, int y){
 	int tile = tileType(x,y);
-	if (tile == DIMENSION_TILE) {
-		int subtileCount = 0;
-		// find the number of subtiles after this one
-		for (int i = tileIndex(x,y) + 1; i < width * height; i++) {
-			if (tileMap[i] == DIMENSION_TILE) {
-				subtileCount++;
-			}
-		}
-		int subtileIndex = SUBLEVEL_SIZE -1 - subtileCount;
-		int *sublevel = currentSublevelMap();// sub level B tile after change
-		tile = sublevel[subtileIndex];
-		if (changedDimension) {
-			tile -= TILE_TYPES;
-		}
-	}
 	return tile == WALL_TILE || (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
@@ -201,7 +169,7 @@ int Level::tileType(int x, int y){
 	if(index < 0 || index >= width * height)
 		return -1;
 	else
-		return tileMap[index];
+		return currentMap()[index];
 }
 
 // grid based collision
@@ -211,26 +179,11 @@ int Level::tile_type_grid(int x, int y){
 	if(index < 0 || index >= width * height)
 		return -1;
 	else
-		return tileMap[index];
+		return currentMap()[index];
 }
 
 bool Level::tile_solid_grid(int x, int y){
 	int tile = tile_type_grid(x,y);
-	if (tile == DIMENSION_TILE) {
-		int subtileCount = 0;
-		// find the number of subtiles after this one
-		for (int i = (y * width) + x + 1; i < width * height; i++) {
-			if (tileMap[i] == DIMENSION_TILE) {
-				subtileCount++;
-			}
-		}
-		int subtileIndex = SUBLEVEL_SIZE -1 - subtileCount;
-		int *sublevel = currentSublevelMap();// sub level B tile after change
-		tile = sublevel[subtileIndex];
-		if (changedDimension) {
-			tile -= TILE_TYPES;
-		}
-	}
 	return (tile==WALL_TILE || tile==TEMPLE_FLOOR)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
 }
 
@@ -256,15 +209,15 @@ int Level::tileIndex(int xPosition, int yPosition){
 vector<sf::Vector2i> Level::getWalls(){
 	vector<sf::Vector2i> indicies;
 	for(int i = 0; i < width * height; i++){
-		if(tileMap[i] == WALL_TILE)
+		if(currentMap()[i] == WALL_TILE)
 			indicies.push_back(getTileCoordinates(i));
 	}
 	return indicies;
 }
 
 /// return array for current sublevel
-int *Level::currentSublevelMap(){
-	return changedDimension ? sublevelB : sublevelA;
+int *Level::currentMap(){
+	return changedDimension ? alternateMap : tileMap;
 }
 
 /// change the dimension the user is in

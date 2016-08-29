@@ -22,14 +22,14 @@
 class Level
 {
 public:
-	Level(char* path, sf::RenderWindow *window, Player *player);
+	Level(sf::RenderWindow *window, Player *player);
 	~Level();
 	int getXOffset();
 	int getYOffset();
 	void setXOffset(int offset);
 	void setYOffset(int offset);
-	void loadLevel(char* path);
-	void loadFlareMapText(std::string fileName, int *map, bool alternateDimension);
+	void loadLevel();
+	void loadFlareMapText(std::string fileName, int *map);
 	void update(float dt);
 	void render();
 	bool inSolid(int x, int y);
@@ -45,7 +45,7 @@ public:
 	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
 	SoundManager* getSoundManager();
-	int *currentSublevelMap();
+	int *currentMap();
 	void changeDimensions();
 	std::vector<sf::Vector2i> getWalls();
 	sf::Vector2i getTileCoordinates(int index);
@@ -62,8 +62,7 @@ private:
 	sf::RenderWindow *window;
 	int width, height;
 	int *tileMap;
-	int *sublevelA;
-	int *sublevelB;
+	int *alternateMap;
 	int xOffset = 0, yOffset = 0;
 	Tile *tiles;
 	Player *player;
