@@ -12,10 +12,10 @@ using std::vector;
 Level::Level(sf::RenderWindow *window, Player *player){
 	this->window = window;
 	tiles = new Tile(window);
-	loadLevel();
+	loadLevel("level01");
 	setPlayer(player);
 
-	positionPlayer((spawnTile.x+1)*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
+	spawnPlayer();
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -38,8 +38,8 @@ Level::~Level(){
 	delete soundManager;
 }
 
-void Level::loadLevel(){
-	std::ifstream level("assets/levels/level02.txt");
+void Level::loadLevel(std::string name){
+	std::ifstream level("assets/levels/" + name + ".txt");
 
 	if(!level){
 		window->close();
@@ -56,11 +56,11 @@ void Level::loadLevel(){
 
 	// read in tiles for map
 	tileMap = new int[width * height];
-	loadFlareMapText("assets/levels/level02.txt", tileMap);
+	loadFlareMapText("assets/levels/" + name + ".txt", tileMap);
 	
 	// load the alternate dimension map assumed to be the same size as the normal map
 	alternateMap = new int[width * height];
-	loadFlareMapText("assets/levels/level02b.txt", alternateMap);
+	loadFlareMapText("assets/levels/" + name + "b.txt", alternateMap);
 }
 
 /**
@@ -220,7 +220,7 @@ void Level::changeDimensions(){
 	changedDimension = !changedDimension;
 }
 
-void Level::set_changedDimension(bool cd){
+void Level::setChangedDimension(bool cd){
 	changedDimension=cd;
 }
 
@@ -253,6 +253,10 @@ void Level::positionPlayer(float x, float y){
 	player->set_true(x, y);
 	this->xOffset = player->getPosition().x - x;
 	this->yOffset = player->getPosition().y - y;
+}
+
+void Level::spawnPlayer(){
+	positionPlayer((spawnTile.x+1)*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
 }
 
 int Level::getXOffset(){

@@ -28,7 +28,7 @@ public:
 	int getYOffset();
 	void setXOffset(int offset);
 	void setYOffset(int offset);
-	void loadLevel();
+	void loadLevel(std::string name);
 	void loadFlareMapText(std::string fileName, int *map);
 	void update(float dt);
 	void render();
@@ -52,8 +52,9 @@ public:
 	void setSwitchActivated(bool switchState);
 	void changeMessage(std::string text);
 	sf::Vector2i getSpawnTile();
+	void spawnPlayer();
 
-	void set_changedDimension(bool cd);
+	void setChangedDimension(bool cd);
 
 	// grid based collision
 	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
