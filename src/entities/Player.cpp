@@ -134,7 +134,7 @@ void Player::update(float dt){
 
 
 	if(!jump){
-		if(yDirection==-1){
+		if(yDirection==-1 && y_velocity==0){
 			y_velocity = 16;
 			jump=true;
 			total_time=5;
