@@ -12,7 +12,7 @@
 
 #include "Mob.hpp"
 
-#define DIMENSION_CHANGE_DELAY 0.25 // in seconds
+#define DIMENSION_CHANGE_DELAY .5 // in seconds
 
 #define PLAYER_WIDTH 128
 #define PLAYER_HEIGHT 128
@@ -55,14 +55,12 @@ private:
 
 	int xDirection = 0; // integer value representing the direction the player is facing
 	int yDirection = 0;
-	float true_x=0; //x value of player origin relative to level 0,0
-	float true_y=0; //y value of player origin relative to level 0,0
+	int true_x=0; //x value of player origin relative to level 0,0
+	int true_y=0; //y value of player origin relative to level 0,0
 	int grid_x=0; // tile grid x value of player location
 	int grid_y=0; // tile grid y value of player location
 
 	int y_velocity = -3;
-	float dy;
-	float prevDx;
 
 	bool freefalling=true;
 	float rot;
