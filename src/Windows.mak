@@ -9,7 +9,7 @@ BIN_DIR=../bin/
 WINDOWS_OUTPUT=win32_build/
 OUTPUT = $(BIN_DIR)$(WINDOWS_OUTPUT)
 OBJ := $(addprefix $(OUTPUT),$(notdir $(CPP_FILES:.cpp=.o)))
-LINK= -o $(OUTPUT)$(EXEC_FILE).exe -lsfml-main -lsfml-window-s -lsfml-graphics-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lgdi32 -ljpeg -lfreetype -lpng -lbz2 -lharfbuzz -lz -lglib-2.0 -lintl -lws2_32 -liconv -lsndfile -lFLAC -lvorbisfile -lvorbisenc -lvorbis -logg -ldsound -lOpenAL32 -lole32 -lwinmm 
+LINK= -o $(OUTPUT)$(EXEC_FILE).exe -lsfml-main -lsfml-window-s -lsfml-graphics-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lgdi32 -ljpeg -lfreetype -lpng -lbz2 -lharfbuzz -lz -lglib-2.0 -lintl -lws2_32 -liconv -lsndfile -lFLAC -lvorbisfile -lvorbisenc -lvorbis -logg -ldsound -lOpenAL32 -lole32 -lwinmm
 
 all: $(OUTPUT)$(EXEC_FILE).exe
 
@@ -59,6 +59,9 @@ $(OUTPUT)Mob.o: entities/Mob.cpp
 	$(CC) $(CFLAGS) $< -o $@
 	
 $(OUTPUT)Player.o: entities/Player.cpp
+	$(CC) $(CFLAGS) $< -o $@
+
+$(OUTPUT)Button.o: ui/Button.cpp
 	$(CC) $(CFLAGS) $< -o $@
 
 $(OUTPUT)StartButton.o: ui/StartButton.cpp

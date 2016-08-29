@@ -28,19 +28,12 @@ Level::Level(sf::RenderWindow *window, Player *player){
 	message.setColor(sf::Color::White);
 	changeMessage(MESSAGE_1);
 	
-	switchActivated = new bool[SWITCH_COUNT];
-	for (int i = 0; i < SWITCH_COUNT; i++) {
-		switchActivated[i] = false;
-	}
-
-
-
+	switchActivated = false;
 }
 
 Level::~Level(){
 	delete[] tileMap;
 	delete[] alternateMap;
-	delete[] switchActivated;
 	delete tiles;
 	delete soundManager;
 }
@@ -130,11 +123,15 @@ void Level::render(){
 		if(xp + TILE_SIZE < 0 || xp >= (int) window->getSize().x) continue;
 		if(yp + TILE_SIZE < 0 || yp >= (int) window->getSize().y) continue;
 		int tileNumber = currentMap()[i];
-		if (switchStates()[0]){
+		if (getSwitchActivated()){
 			if (tileNumber == OFF_SWITCH_TILE){
 				tileNumber = ON_SWITCH_TILE;
+			} else if (tileNumber == ON_SWITCH_TILE){
+				tileNumber = OFF_SWITCH_TILE;
 			} else if (tileNumber == CLOSED_DOOR_TILE){
 				tileNumber = OPEN_DOOR_TILE;
+			} else if (tileNumber == OPEN_DOOR_TILE) {
+				tileNumber = CLOSED_DOOR_TILE;
 			}
 		}
 		// render different textures in alternate dimension
@@ -147,11 +144,7 @@ void Level::render(){
 		
 		if (message.getString() != "")
 			window->draw(message);
-
-
-
-
-		
+				
 		//for testing
 	
 		string coordinate_string="";
@@ -172,19 +165,6 @@ void Level::changeMessage(std::string text){
 	messageTimer.restart();
 }
 
-bool Level::inSolid(int x, int y){
-	int tile = tileType(x,y);
-	return tile == WALL_TILE || (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
-}
-
-int Level::tileType(int x, int y){
-	int index = tileIndex(x, y);
-	if(index < 0 || index >= width * height)
-		return -1;
-	else
-		return currentMap()[index];
-}
-
 // grid based collision
 
 int Level::tile_type_grid(int x, int y){
@@ -197,7 +177,9 @@ int Level::tile_type_grid(int x, int y){
 
 bool Level::tile_solid_grid(int x, int y){
 	int tile = tile_type_grid(x,y);
-	return (tile==WALL_TILE || tile==TEMPLE_FLOOR)|| (tile == CLOSED_DOOR_TILE && !switchStates()[0]);
+	return (tile==WALL_TILE || tile==TEMPLE_FLOOR)
+		|| (tile == CLOSED_DOOR_TILE && !getSwitchActivated())
+		|| (tile == OPEN_DOOR_TILE && getSwitchActivated());
 }
 
 sf::Vector2i Level::getTileCoordinates(int index){
@@ -242,8 +224,12 @@ void Level::set_changedDimension(bool cd){
 	changedDimension=cd;
 }
 
-bool *Level::switchStates(){
+bool Level::getSwitchActivated(){
 	return switchActivated;
+}
+
+void Level::setSwitchActivated(bool switchState){
+	switchActivated = switchState;
 }
 
 int Level::getWidthInPixels(){

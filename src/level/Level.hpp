@@ -32,8 +32,6 @@ public:
 	void loadFlareMapText(std::string fileName, int *map);
 	void update(float dt);
 	void render();
-	bool inSolid(int x, int y);
-	int tileType(int x, int y);
 	int tileIndex(sf::Vector2i position);
 	int tileIndex(int xPosition, int yPosition);
 	int getWidthInPixels();
@@ -50,7 +48,8 @@ public:
 	std::vector<sf::Vector2i> getWalls();
 	sf::Vector2i getTileCoordinates(int index);
 	sf::Font getFont();
-	bool *switchStates();
+	bool getSwitchActivated();
+	void setSwitchActivated(bool switchState);
 	void changeMessage(std::string text);
 	sf::Vector2i getSpawnTile();
 
@@ -72,7 +71,7 @@ private:
 	SoundManager *soundManager;
 	bool changedDimension = false;
 	sf::Font font;
-	bool *switchActivated;
+	bool switchActivated;
 	sf::Text message;
 	sf::Clock messageTimer;
 	sf::Vector2i spawnTile;

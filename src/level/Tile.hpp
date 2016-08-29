@@ -16,7 +16,6 @@
 #define TEMPLE_FLOOR 2
 #define TEMPLE_FILLER 3
 
-// not actually in level file
 #define ON_SWITCH_TILE 4
 #define OPEN_DOOR_TILE 5
 #define SPAWN_TILE 6

@@ -62,7 +62,7 @@ sf::Vector2i Player::get_true(){
 //overwritten stuff
 
 void Player::update(float dt){
-	float dts = dt/1000000.0; 
+	float dts = dt/1000000.0;
 	if (dimension_timer.getElapsedTime().asSeconds() > DIMENSION_CHANGE_DELAY &&
 			(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))) {
 		// change dimensions
@@ -78,7 +78,7 @@ void Player::update(float dt){
 	// interact with switches
 	if (level->tile_type_grid(get_grid().x, get_grid().y) == OFF_SWITCH_TILE &&
 			sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !switchHeld){
-		level->switchStates()[0] = !level->switchStates()[0];// toggle state of switch
+		level->setSwitchActivated(!level->getSwitchActivated());// toggle state of switch
 	}
 	switchHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::E);
 
