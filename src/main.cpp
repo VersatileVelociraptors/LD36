@@ -9,7 +9,7 @@
 
 #define WIDTH 1280
 #define HEIGHT 720
-#define TITLE "Goatsie the Video Game"
+#define TITLE "Goatse the Video Game"
 
 void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
 
