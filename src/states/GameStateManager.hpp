@@ -35,7 +35,7 @@ private:
 	MusicManager *musicManager;
 	PlayState* playState;
 	MenuState* menuState;
-	
+	bool stoppedMusic = false;
 };
 
 #endif //GAMESTATEMANAGER_HPP
