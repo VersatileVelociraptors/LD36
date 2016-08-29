@@ -154,18 +154,6 @@ void Level::render(){
 		
 		if (message.getString() != "")
 			window->draw(message);
-				
-		//drawing tile coordinates
-	
-		/*string coordinate_string="";
-		coordinate_string+=std::to_string(i%width)+", "+std::to_string(i/width);
-		sf::Text coordinates;
-		coordinates.setFont(font);
-		coordinates.setCharacterSize(12);
-		coordinates.setPosition(xp, yp);
-		coordinates.setString(coordinate_string);
-		coordinates.setColor(sf::Color::White);
-		window->draw(coordinates);*/
 	}
 }
 

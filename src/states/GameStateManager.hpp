@@ -39,6 +39,9 @@ private:
 	PlayState* playState;
 	MenuState* menuState;
 	EndState* endState;
+	
+	bool muted = false;
+	bool muteHeld = false;
 };
 
 #endif //GAMESTATEMANAGER_HPP

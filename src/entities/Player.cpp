@@ -70,6 +70,11 @@ sf::Vector2i Player::get_true(){
 
 
 void Player::update(float dt){
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !muteHeld) {
+		muted = !muted;
+	}
+	muteHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::Tab);
+	
 	if (dimension_timer.getElapsedTime().asSeconds() > DIMENSION_CHANGE_DELAY &&
 			(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))) {
 		// change dimensions
@@ -133,12 +138,12 @@ void Player::update(float dt){
 	}
 
 
-	if(!jump){
-		if(yDirection==-1 && y_velocity==0){
-			y_velocity = 16;
-			jump=true;
-			total_time=5;
-		}
+	if(!jump && yDirection==-1 && y_velocity==0){
+		y_velocity = 16;
+		jump=true;
+		total_time=5;
+		if (!muted)
+			level->getSoundManager()->play("jump");
 	}
 
 	{
@@ -180,8 +185,7 @@ void Player::update(float dt){
 				}else{
 					move(0, y_velocity);
 				}
-			}else
-			if(level->tile_solid_grid(get_grid().x+1,get_grid().y+1)&& true_x+PLAYER_WIDTH/2>(get_grid().x+1)*TILE_SIZE){
+			}else if(level->tile_solid_grid(get_grid().x+1,get_grid().y+1)&& true_x+PLAYER_WIDTH/2>(get_grid().x+1)*TILE_SIZE){
 				if(true_y+PLAYER_WIDTH/2-y_velocity>=(get_grid().y+1)*TILE_SIZE){
 					y_velocity=0;
 					jump=false;
@@ -189,8 +193,7 @@ void Player::update(float dt){
 				}else{
 					move(0, y_velocity);
 				}
-			}else
-			if(level->tile_solid_grid(get_grid().x-1,get_grid().y+1)){
+			}else if(level->tile_solid_grid(get_grid().x-1,get_grid().y+1)){
 				if(true_y+PLAYER_WIDTH/2-y_velocity>=(get_grid().y+1)*TILE_SIZE&& true_x-PLAYER_WIDTH/2<get_grid().x*TILE_SIZE){
 					y_velocity=0;
 					jump=false;
@@ -203,18 +206,12 @@ void Player::update(float dt){
 			}
 
 		}
-
-
-			
-
+		
 		if(total_time==5){
 			y_velocity-=4;
 			total_time=0;
 		}
 		total_time++;
-
-
-
 	}
 
 
