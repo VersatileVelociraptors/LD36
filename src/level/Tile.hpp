@@ -25,9 +25,9 @@
 #define TEMPLE_FILLER 3
 
 // not actually in level file
-#define ON_SWITCH_TILE 4
-#define OPEN_DOOR_TILE 5
-#define DIMENSION_TILE TILE_TYPES
+#define DIMENSION_TILE 4
+#define ON_SWITCH_TILE 5
+#define OPEN_DOOR_TILE 6
 
 #define WALL_TILE TEMPLE_FLOOR
 
