@@ -21,16 +21,15 @@ void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdat
 
 	manager->getWindow()->clear();
 	manager->render();
-	manager->getWindow()->draw(fps);
-	manager->getWindow()->draw(ups);
+	//manager->getWindow()->draw(fps);
+	//manager->getWindow()->draw(ups);
 	manager->getWindow()->display();
 }
 
 int main(int argc, char const *argv[])
 {
-	printf("fuck\n");
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
-	window.setPosition(sf::Vector2i(0,10));
+	window.setPosition(sf::Vector2i(0,20));
 	window.setVerticalSyncEnabled(false);
 	GameStateManager manager(&window);
 	manager.set(MENU);
@@ -81,7 +80,7 @@ int main(int argc, char const *argv[])
 			updates++;
 		}
 
-		sf::Text fps;
+		sf::Text fps;						//framerate printing stuff
 		char fps_text[15];
 		sprintf(fps_text, "%.1f FPS", FPS);
 		fps.setFont(font);
@@ -97,7 +96,7 @@ int main(int argc, char const *argv[])
 		ups.setPosition(0, 30);
 		ups.setString(ups_text);
 		ups.setColor(sf::Color::White);
-
+	
 		update(&manager, fps, ups, &doUpdate, dt);
 		if(dt >= MS)
 			dt -= MS;

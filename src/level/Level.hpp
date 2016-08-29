@@ -16,8 +16,8 @@
 
 #define MESSAGE_TIME 4 // in seconds
 #define MESSAGE_FADE 25 // increases how quickly messages become tranparent
-#define MESSAGE_1 "Placeholder"
-#define MESSAGE_2 "The text will stay centered even if the string is long."
+#define MESSAGE_1 "Press Shift to alternate dimensions"
+#define MESSAGE_2 "Press E to flip switches"
 
 class Level
 {
