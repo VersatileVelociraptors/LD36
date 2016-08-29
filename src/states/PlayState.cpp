@@ -3,7 +3,7 @@
 #include <cstring>
 #include <string>//for testing
 
-PlayState::PlayState(sf::RenderWindow* window){
+PlayState::PlayState(sf::RenderWindow* window, GameStateManager* manager){
 	this->window = window;
 	
 	Player* player = new Player();
@@ -12,6 +12,8 @@ PlayState::PlayState(sf::RenderWindow* window){
 	
 	player->setLevel(level);
 	player->init();
+	
+	this->manager = manager;
 }
 
 PlayState::~PlayState(){
@@ -24,6 +26,10 @@ void PlayState::start(){
 
 void PlayState::update(float dt){
 	level->update(dt);
+	
+	if (level->getCurrentLevel() >= LEVEL_COUNT) {
+		manager->set(END);
+	}
 }
 
 void PlayState::render(){

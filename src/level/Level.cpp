@@ -101,12 +101,9 @@ void Level::loadFlareMapText(std::string fileName, int *map){
 
 /// get on my level
 void Level::nextLevel(){
-	std::array<std::string, 5> levels = {"level01", "level02", "level03", "level04", "level05", "level06"};
+	std::array<std::string, LEVEL_COUNT> levels = {"level01", "level02", "level03", "level04", "level05", "level06"};
 	if (++currentLevel < levels.size()){
 		loadLevel(levels[currentLevel]);
-	} else {
-		std::cout << "Game over!" << std::endl;
-		window->close();
 	}
 }
 
@@ -310,4 +307,8 @@ sf::Font Level::getFont(){
 
 sf::Vector2i Level::getSpawnTile(){
 	return this->spawnTile;
+}
+
+int Level::getCurrentLevel(){
+       return currentLevel;
 }

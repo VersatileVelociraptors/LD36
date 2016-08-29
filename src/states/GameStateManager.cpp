@@ -4,8 +4,9 @@
 GameStateManager::GameStateManager(sf::RenderWindow *window){
 	this->window = window;
 
-	playState = new PlayState(window);
+	playState = new PlayState(window, this);
 	menuState = new MenuState(this);
+	endState = new EndState(this);
 	musicManager = new MusicManager(window);
 	musicManager->addAllMusicInAssets();
 	musicManager->loop("placeholder");
@@ -38,7 +39,7 @@ void GameStateManager::set(StateEnumeration state){
 		currentState = playState;
 		playState->start();
 	}else if(state == END){
-		std::cout << "Placeholder" << std::endl;
+		currentState = endState;
 	}
 }
 
