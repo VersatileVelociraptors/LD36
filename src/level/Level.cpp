@@ -269,7 +269,7 @@ void Level::positionPlayer(float x, float y){
 }
 
 void Level::spawnPlayer(){
-	positionPlayer((spawnTile.x+1)*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
+	positionPlayer((spawnTile.x+1)*TILE_SIZE+(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE+(PLAYER_HEIGHT/2));
 }
 
 int Level::getXOffset(){
