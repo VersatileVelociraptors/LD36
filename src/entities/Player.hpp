@@ -62,7 +62,6 @@ private:
 
 	int y_velocity = -3;
 
-	bool freefalling=true;
 	float rot;
 	float total_time=0;
 
