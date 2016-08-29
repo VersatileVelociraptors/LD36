@@ -43,7 +43,7 @@ Level::~Level(){
 }
 
 void Level::loadLevel(){
-	std::ifstream level("assets/levels/test.txt");
+	std::ifstream level("assets/levels/level01.txt");
 
 	if(!level){
 		window->close();
@@ -136,7 +136,7 @@ void Level::render(){
 		}
 		// render different textures in alternate dimension
 		if (changedDimension){
-			if(tileNumber!=0){
+			if(tileNumber >= 0){
 				tileNumber += TILE_TYPES;
 			}
 		}

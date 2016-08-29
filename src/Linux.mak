@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -std=c++11 -Wall -O3
+CFLAGS=-g -c -std=c++11 -Wall -O3
 BIN_DIR=../bin/
 LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
