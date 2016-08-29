@@ -9,7 +9,7 @@
 
 #define WIDTH 1280
 #define HEIGHT 720
-#define TITLE "Goatse the Video Game"
+#define TITLE "Raptroid Prime"
 
 void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdate, double dt){
 
@@ -28,6 +28,7 @@ void update(GameStateManager* manager, sf::Text fps, sf::Text ups, bool *doUpdat
 
 int main(int argc, char const *argv[])
 {
+	printf("fuck\n");
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), TITLE, sf::Style::Titlebar | sf::Style::Close);
 	window.setPosition(sf::Vector2i(0,10));
 	window.setVerticalSyncEnabled(false);

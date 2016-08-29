@@ -9,6 +9,7 @@
 
 #include "State.hpp"
 #include "GameStateManager.hpp"
+#include "../entities/Player.hpp"
 #include "../level/Level.hpp"
 
 class GameStateManager;
@@ -22,7 +23,7 @@ public:
 	void update(float dt);
 	void render();
 private:
-	Level* level;
+	Player* player;
 	sf::RenderWindow* window;
 	GameStateManager* manager;
 };

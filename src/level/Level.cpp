@@ -10,14 +10,12 @@ using std::ifstream;
 using std::string;
 using std::vector;
 
-Level::Level(sf::RenderWindow *window, Player *player){
+Level::Level(sf::RenderWindow *window){
 	this->window = window;
 	tiles = new Tile(window);
 	currentLevel = -1; // needed ot start on the first level
-	nextLevel();
-	setPlayer(player);
 
-	spawnPlayer();
+	nextLevel();
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -85,9 +83,9 @@ void Level::loadFlareMapText(std::string fileName, int *map){
 	}
 	std::getline(stream, line);
 	for (int i = 0; i < mapHeight; ++i){
-		for (int j = 0; j < mapWidth*2; j+=2){
-			int value = atoi(&line.at(j)) -1;
-			int index = i * mapWidth + j/2;
+		for (int j = 0; j < mapWidth; j++){
+			int value = atoi(&line.at((j*2))) -1;
+			int index = i * mapWidth + j;
 			map[index] = value;
 			if(value == SPAWN_TILE){
 				spawnTile.x = j;
@@ -108,8 +106,6 @@ void Level::nextLevel(){
 }
 
 void Level::update(float dt){
-	player->update(dt);
-	
 	if (message.getString() != "") {
 		if (messageTimer.getElapsedTime().asSeconds() > MESSAGE_TIME){
 			if (message.getString() == MESSAGE_1){
@@ -258,17 +254,6 @@ int Level::getHeightInTiles(){
 	return height;
 }
 
-void Level::positionPlayer(float x, float y){
-
-	player->set_true(x, y);
-	this->xOffset = player->getPosition().x - x;
-	this->yOffset = player->getPosition().y - y;
-}
-
-void Level::spawnPlayer(){
-	positionPlayer((spawnTile.x+1)*TILE_SIZE+(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE+(PLAYER_HEIGHT/2));
-}
-
 int Level::getXOffset(){
 	return xOffset;
 }
@@ -283,14 +268,6 @@ void Level::setXOffset(int offset){
 
 void Level::setYOffset(int offset){
 	yOffset = offset;
-}
-
-Player* Level::getPlayer(){
-	return this->player;
-}
-
-void Level::setPlayer(Player *player){
-	this->player = player;
 }
 
 sf::RenderWindow* Level::getWindow(){

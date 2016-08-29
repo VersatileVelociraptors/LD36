@@ -22,7 +22,7 @@
 class Level
 {
 public:
-	Level(sf::RenderWindow *window, Player *player);
+	Level(sf::RenderWindow *window);
 	~Level();
 	int getXOffset();
 	int getYOffset();
@@ -39,9 +39,6 @@ public:
 	int getHeightInPixels();
 	int getWidthInTiles();
 	int getHeightInTiles();
-	void positionPlayer(float x, float y);
-	Player* getPlayer();
-	void setPlayer(Player *player);
 	sf::RenderWindow* getWindow();
 	SoundManager* getSoundManager();
 	int *currentMap();
@@ -53,7 +50,6 @@ public:
 	void setSwitchActivated(bool switchState);
 	void changeMessage(std::string text);
 	sf::Vector2i getSpawnTile();
-	void spawnPlayer();
 	int getCurrentLevel();
 
 	void setChangedDimension(bool cd);
@@ -69,7 +65,6 @@ private:
 	int *alternateMap;
 	int xOffset = 0, yOffset = 0;
 	Tile *tiles;
-	Player *player;
 	sf::Clock clock;
 	SoundManager *soundManager;
 	bool changedDimension = false;

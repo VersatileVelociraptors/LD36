@@ -39,6 +39,10 @@ public:
 	void set_grid();
 	sf::Vector2i get_grid();
 
+	Level* get_level();
+
+	void spawn();
+
 	
 private:
 	sf::RenderWindow *window;
@@ -51,18 +55,22 @@ private:
 
 	int xDirection = 0; // integer value representing the direction the player is facing
 	int yDirection = 0;
-	float true_x; //x value of player origin relative to level 0,0
-	float true_y; //y value of player origin relative to level 0,0
-	int grid_x; // tile grid x value of player location
-	int grid_y; // tile grid y value of player location
+	float true_x=0; //x value of player origin relative to level 0,0
+	float true_y=0; //y value of player origin relative to level 0,0
+	int grid_x=0; // tile grid x value of player location
+	int grid_y=0; // tile grid y value of player location
 
-	int y_velocity = 0;
+	int y_velocity = -3;
 	float dy;
 	float prevDx;
 
 	bool freefalling=true;
 	float rot;
-	float total_time;
+	float total_time=0;
+
+	bool jump=false;
+
+	void teleport(int x, int y); //moves player to gridspace
 
 };
 
