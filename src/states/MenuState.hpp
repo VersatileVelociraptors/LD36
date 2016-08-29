@@ -5,6 +5,8 @@
 #include "../ui/StartButton.hpp"
 #include "../ui/ExitButton.hpp"
 #include "GameStateManager.hpp"
+#include <string>
+
 
 class GameStateManager;
 
@@ -23,6 +25,10 @@ private:
 	sf::RenderWindow* window;
 	sf::Texture menuGraphicTexture;
 	sf::Sprite* menuGraphicSprite; 
+
+	sf::Text message;
+	sf::Font font;
+
 };
 
 #endif // MENUSTATE_HPP

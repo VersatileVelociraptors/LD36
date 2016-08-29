@@ -1,5 +1,4 @@
 #include "MenuState.hpp"
-
 MenuState::MenuState(GameStateManager* manager){
 	this->manager = manager;
 	this->window = manager->getWindow();
@@ -10,6 +9,16 @@ MenuState::MenuState(GameStateManager* manager){
 	menuGraphicSprite = new sf::Sprite(menuGraphicTexture);
 	menuGraphicSprite->setOrigin(menuGraphicSprite->getLocalBounds().width/2, menuGraphicSprite->getLocalBounds().height/2);
 	menuGraphicSprite->setPosition(startButton->getPosition().x + startButton->getLocalBounds().width/2, startButton->getPosition().y-menuGraphicSprite->getLocalBounds().height/2 - 10);
+
+
+	if (!font.loadFromFile("assets/fonts/arial.ttf"))
+		window->close();
+	
+	message.setFont(font);
+	message.setCharacterSize(30);
+	message.setColor(sf::Color::White);
+	message.setString("penis");
+	message.setPosition(50,50);
 }
 
 MenuState::~MenuState(){
@@ -41,4 +50,5 @@ void MenuState::render(){
 	window->draw(*menuGraphicSprite);
 	window->draw(*startButton);
 	window->draw(*exitButton);
+	window->draw(message);
 }
