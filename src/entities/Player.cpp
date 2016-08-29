@@ -87,7 +87,7 @@ void Player::update(float dt){
 		level->setChangedDimension(false);
 		level->setSwitchActivated(false);
 	} else if (currentTileType() == END_TILE) {
-		level->loadLevel("level02");
+		level->nextLevel();
 		level->spawnPlayer();
 		level->setChangedDimension(false);
 		level->setSwitchActivated(false);

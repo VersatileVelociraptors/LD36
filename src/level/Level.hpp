@@ -30,6 +30,7 @@ public:
 	void setYOffset(int offset);
 	void loadLevel(std::string name);
 	void loadFlareMapText(std::string fileName, int *map);
+	void nextLevel();
 	void update(float dt);
 	void render();
 	int tileIndex(sf::Vector2i position);
@@ -76,6 +77,7 @@ private:
 	sf::Text message;
 	sf::Clock messageTimer;
 	sf::Vector2i spawnTile;
+	unsigned int currentLevel;
 };
 
 #endif //LEVEL_HPP
