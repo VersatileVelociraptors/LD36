@@ -24,6 +24,11 @@ void GameStateManager::render(){
 
 void GameStateManager::update(float dt){
 	getCurrentState()->update(dt);
+	
+	// bye bye 16 year old skrillex
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)){
+		musicManager->stop();
+	}
 }
 
 void GameStateManager::set(StateEnumeration state){
