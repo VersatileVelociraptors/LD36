@@ -24,7 +24,7 @@ Level::Level(sf::RenderWindow *window){
 		window->close();
 	
 	message.setFont(font);
-	message.setCharacterSize(39);
+	message.setCharacterSize(30);
 	message.setColor(sf::Color::White);
 	changeMessage(MESSAGE_1);
 	
@@ -111,11 +111,15 @@ void Level::update(float dt){
 			if (message.getString() == MESSAGE_1){
 				changeMessage(MESSAGE_2);
 			} else if (message.getString() == MESSAGE_2){
-				message.setString("");
+				changeMessage(MESSAGE_3);
+			} else if (message.getString() == MESSAGE_3){
+				changeMessage("");
 			}
 		} else {
+			// slowly make message tranparent
 			sf::Color messageColor = message.getColor();
-			messageColor.a = 255 - messageTimer.getElapsedTime().asMilliseconds() / MESSAGE_FADE;
+			float alpha = messageTimer.getElapsedTime().asSeconds() / MESSAGE_TIME;
+			messageColor.a = 255 - 255 * alpha;
 			message.setColor(messageColor);
 		}
 	}
