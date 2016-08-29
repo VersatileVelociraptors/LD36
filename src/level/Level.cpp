@@ -60,11 +60,11 @@ void Level::loadLevel(){
 
 	// read in tiles for map
 	tileMap = new int[width * height];
-	loadFlareMapText("assets/levels/test.txt", tileMap);
+	loadFlareMapText("assets/levels/level01.txt", tileMap);
 	
 	// load the alternate dimension map assumed to be the same size as the normal map
 	alternateMap = new int[width * height];
-	loadFlareMapText("assets/levels/testb.txt", alternateMap);
+	loadFlareMapText("assets/levels/level01b.txt", alternateMap);
 }
 
 /**
@@ -135,8 +135,11 @@ void Level::render(){
 			}
 		}
 		// render different textures in alternate dimension
-		if (changedDimension)
-			tileNumber += TILE_TYPES;
+		if (changedDimension){
+			if(tileNumber!=0){
+				tileNumber += TILE_TYPES;
+			}
+		}
 		tiles->render(tileNumber, xp, yp);// render the tile
 		
 		if (message.getString() != "")
