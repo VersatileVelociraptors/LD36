@@ -13,6 +13,7 @@ using std::vector;
 Level::Level(sf::RenderWindow *window, Player *player){
 	this->window = window;
 	tiles = new Tile(window);
+	currentLevel = -1; // needed ot start on the first level
 	nextLevel();
 	setPlayer(player);
 
