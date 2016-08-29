@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <array>
 
 #include "Level.hpp"
 
@@ -12,7 +13,7 @@ using std::vector;
 Level::Level(sf::RenderWindow *window, Player *player){
 	this->window = window;
 	tiles = new Tile(window);
-	loadLevel("level01");
+	nextLevel();
 	setPlayer(player);
 
 	spawnPlayer();
@@ -94,6 +95,17 @@ void Level::loadFlareMapText(std::string fileName, int *map){
 		}
 
 		std::getline(stream, line);
+	}
+}
+
+/// get on my level
+void Level::nextLevel(){
+	std::array<std::string, 5> levels = {"level01", "level02", "level03", "level04", "level05"};
+	if (++currentLevel < levels.size()){
+		loadLevel(levels[currentLevel]);
+	} else {
+		std::cout << "Game over!" << std::endl;
+		window->close();
 	}
 }
 
