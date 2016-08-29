@@ -8,12 +8,15 @@
 #include <SFML/Graphics.hpp>
 
 #include "State.hpp"
+#include "GameStateManager.hpp"
 #include "../level/Level.hpp"
+
+class GameStateManager;
 
 class PlayState : public State{
 	
 public:
-	PlayState(sf::RenderWindow* window);
+	PlayState(sf::RenderWindow* window, GameStateManager* manager);
 	~PlayState();
 	void start();
 	void update(float dt);
@@ -21,6 +24,7 @@ public:
 private:
 	Level* level;
 	sf::RenderWindow* window;
+	GameStateManager* manager;
 };
 
 #endif // PLAYSTATE_HPP

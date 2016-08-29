@@ -6,10 +6,13 @@
 #include "../audio/MusicManager.hpp"
 #include "PlayState.hpp"
 #include "MenuState.hpp"
+#include "EndState.hpp"
 
 #include <SFML/Graphics.hpp>
 
+class PlayState;
 class MenuState;
+class EndState;
 
 enum StateEnumeration {
 	MENU, PLAY, END
@@ -35,7 +38,7 @@ private:
 	MusicManager *musicManager;
 	PlayState* playState;
 	MenuState* menuState;
-	bool stoppedMusic = false;
+	EndState* endState;
 };
 
 #endif //GAMESTATEMANAGER_HPP

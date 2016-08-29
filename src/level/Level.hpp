@@ -12,7 +12,7 @@
 #include "../entities/Player.hpp"
 #include "../audio/SoundManager.hpp"
 
-#define SUBLEVEL_SIZE 4 // number of tiles in sublevel
+#define LEVEL_COUNT 6
 
 #define MESSAGE_TIME 4 // in seconds
 #define MESSAGE_FADE 25 // increases how quickly messages become tranparent
@@ -54,6 +54,7 @@ public:
 	void changeMessage(std::string text);
 	sf::Vector2i getSpawnTile();
 	void spawnPlayer();
+	int getCurrentLevel();
 
 	void setChangedDimension(bool cd);
 
