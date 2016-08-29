@@ -15,7 +15,7 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[TEMPLE_FILLER].loadFromFile("assets/images/Temple_floor.png"))
 		this->window->close();
 	
-	if(!textures[DEATH_TILE].loadFromFile("assets/images/Temple_floor.png"))
+	if(!textures[DEATH_TILE].loadFromFile("assets/images/death_tile.png"))
 		this->window->close();
 	
 	if(!textures[SPAWN_TILE].loadFromFile("assets/images/spawn_tile.png"))

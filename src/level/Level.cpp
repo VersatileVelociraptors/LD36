@@ -46,7 +46,7 @@ Level::~Level(){
 }
 
 void Level::loadLevel(){
-	std::ifstream level("assets/levels/level01.txt");
+	std::ifstream level("assets/levels/level02.txt");
 
 	if(!level){
 		window->close();
@@ -63,11 +63,11 @@ void Level::loadLevel(){
 
 	// read in tiles for map
 	tileMap = new int[width * height];
-	loadFlareMapText("assets/levels/level01.txt", tileMap);
+	loadFlareMapText("assets/levels/level02.txt", tileMap);
 	
 	// load the alternate dimension map assumed to be the same size as the normal map
 	alternateMap = new int[width * height];
-	loadFlareMapText("assets/levels/level01b.txt", alternateMap);
+	loadFlareMapText("assets/levels/level02b.txt", alternateMap);
 }
 
 /**
