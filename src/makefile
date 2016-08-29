@@ -7,7 +7,7 @@ WINDOWS_OUTPUT=win32_build/
 LINUX_OUTPUT=linux_build/
 OUTPUT = $(BIN_DIR)$(LINUX_OUTPUT)
 CPP_FILES := $(shell find -type f -name '*.cpp')
-EXEC_FILE= GoatsetheVideoGame
+EXEC_FILE= Raptroid\ Prime
 LINK= -o $(OUTPUT)$(EXEC_FILE) -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 MAKE= make -f
 
