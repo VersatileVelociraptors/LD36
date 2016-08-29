@@ -15,6 +15,7 @@ class PlayState : public State{
 public:
 	PlayState(sf::RenderWindow* window);
 	~PlayState();
+	void start();
 	void update(float dt);
 	void render();
 private:

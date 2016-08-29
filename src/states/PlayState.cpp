@@ -18,6 +18,10 @@ PlayState::~PlayState(){
 	delete level;
 }
 
+void PlayState::start(){
+	level->changeMessage(MESSAGE_1);
+}
+
 void PlayState::update(float dt){
 	level->update(dt);
 }
