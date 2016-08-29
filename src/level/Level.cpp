@@ -15,7 +15,7 @@ Level::Level(char *path, sf::RenderWindow *window, Player *player){
 	loadLevel(path);
 	setPlayer(player);
 
-	positionPlayer(1*TILE_SIZE+(PLAYER_WIDTH/2), 3*TILE_SIZE);
+	positionPlayer(spawnTile.x*TILE_SIZE-(PLAYER_WIDTH/2), spawnTile.y*TILE_SIZE);
 
 	this->soundManager = new SoundManager(this->window);
 	soundManager->addAllSoundInAssets();
@@ -96,11 +96,14 @@ void Level::loadFlareMapText(std::string fileName, int *map, bool alternateDimen
 			int value = atoi(&line.at(j)) -1;
 			int index = i * mapWidth + j/2;
 			map[index] = value;
+			if(value == SPAWN_TILE){
+				spawnTile.x = j;
+				spawnTile.y = i;
+			}
 			if (alternateDimension) {
 				map[index] += TILE_TYPES;
 			}
 		}
-
 		std::getline(stream, line);
 	}
 }
@@ -330,4 +333,8 @@ SoundManager* Level::getSoundManager(){
 
 sf::Font Level::getFont(){
 	return font;
+}
+
+sf::Vector2i Level::getSpawnTile(){
+	return this->spawnTile;
 }

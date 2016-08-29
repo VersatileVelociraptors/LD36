@@ -52,6 +52,7 @@ public:
 	sf::Font getFont();
 	bool *switchStates();
 	void changeMessage(std::string text);
+	sf::Vector2i getSpawnTile();
 
 	// grid based collision
 	int tile_type_grid(int x, int y);//returns tile type based on grid x/y
@@ -73,6 +74,7 @@ private:
 	bool *switchActivated;
 	sf::Text message;
 	sf::Clock messageTimer;
+	sf::Vector2i spawnTile;
 };
 
 #endif //LEVEL_HPP

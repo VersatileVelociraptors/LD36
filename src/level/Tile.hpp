@@ -27,7 +27,11 @@
 #define DIMENSION_TILE 4
 #define ON_SWITCH_TILE 5
 #define OPEN_DOOR_TILE 6
-#define TILE_TYPES 7
+#define SPAWN_TILE 7
+#define DEATH_TILE 8
+#define END_TILE 9
+
+#define TILE_TYPES 10
 
 #define WALL_TILE TEMPLE_FLOOR
 

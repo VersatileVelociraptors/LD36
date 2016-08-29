@@ -15,6 +15,13 @@ Tile::Tile(sf::RenderWindow *window){
 	if(!textures[TEMPLE_FILLER].loadFromFile("assets/images/Temple_floor.png"))
 		this->window->close();
 
+	if(!textures[DEATH_TILE].loadFromFile("assets/images/Temple_floor.png"))
+		this->window->close();
+
+	// Placeholder images
+	if(!textures[END_TILE].loadFromFile("assets/images/Temple_floor.png"))
+		this->window->close();
+
 	// textures for activated switches and doors
 	if(!textures[ON_SWITCH_TILE].loadFromFile("assets/images/Switch_on.png"))
 		this->window->close();
@@ -40,6 +47,13 @@ Tile::Tile(sf::RenderWindow *window){
 	
 	if(!textures[OPEN_DOOR_TILE + TILE_TYPES].loadFromFile("assets/images/Door_open.png"))
 		this->window->close();
+	
+	// Placeholder images
+	if(!textures[DEATH_TILE + TILE_TYPES].loadFromFile("assets/images/Temple_floor.png"))
+		this->window->close();
+
+	if(!textures[END_TILE + TILE_TYPES].loadFromFile("assets/images/Temple_floor.png"))
+		this->window->close();
 }
 
 Tile::~Tile(){
@@ -52,7 +66,7 @@ void Tile::offset(int x, int y){
 }
 
 void Tile::render(int texture, int x, int y){
-	if(texture >= 0){
+	if(texture >= 0 && texture != SPAWN_TILE && texture != SPAWN_TILE + TILE_TYPES){
 		sf::Sprite sprite(textures[texture]);
 		sprite.setPosition(x, y);
 		window->draw(sprite);
