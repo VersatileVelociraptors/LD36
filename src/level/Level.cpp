@@ -101,7 +101,7 @@ void Level::loadFlareMapText(std::string fileName, int *map){
 
 /// get on my level
 void Level::nextLevel(){
-	std::array<std::string, 5> levels = {"level01", "level02", "level03", "level04", "level05", "level06"};
+	std::array<std::string, 6> levels = {"level01", "level02", "level03", "level04", "level05", "level06"};
 	if (++currentLevel < levels.size()){
 		loadLevel(levels[currentLevel]);
 	} else {
