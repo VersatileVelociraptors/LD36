@@ -70,6 +70,11 @@ sf::Vector2i Player::get_true(){
 
 
 void Player::update(float dt){
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !muteHeld) {
+		muted = !muted;
+	}
+	muteHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::Tab);
+	
 	if (dimension_timer.getElapsedTime().asSeconds() > DIMENSION_CHANGE_DELAY &&
 			(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))) {
 		// change dimensions
@@ -137,7 +142,8 @@ void Player::update(float dt){
 		y_velocity = 16;
 		jump=true;
 		total_time=5;
-		level->getSoundManager()->play("jump");
+		if (!muted)
+			level->getSoundManager()->play("jump");
 	}
 
 	{

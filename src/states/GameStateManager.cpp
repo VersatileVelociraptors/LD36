@@ -1,5 +1,4 @@
 #include "GameStateManager.hpp"
-#include <iostream>
 
 GameStateManager::GameStateManager(sf::RenderWindow *window){
 	this->window = window;
@@ -27,9 +26,16 @@ void GameStateManager::update(float dt){
 	getCurrentState()->update(dt);
 	
 	// bye bye 16 year old skrillex
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)){
-		musicManager->stop();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !muteHeld){
+		if (!muted) {
+			musicManager->stop();
+		} else {
+			musicManager->loop("placeholder");
+			musicManager->play("placeholder");
+		}
+		muted = !muted;
 	}
+	muteHeld = sf::Keyboard::isKeyPressed(sf::Keyboard::Tab);
 }
 
 void GameStateManager::set(StateEnumeration state){

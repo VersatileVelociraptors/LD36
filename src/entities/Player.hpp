@@ -66,6 +66,9 @@ private:
 	float total_time=0;
 
 	bool jump=false;
+	
+	bool muted = false;
+	bool muteHeld = false;
 
 	void teleport(int x, int y); //moves player to gridspace
 
