@@ -1,27 +1,38 @@
-# LD36
+# Raptroid Prime
 
-Credits:
+A platformer made in 72 hours for the Ludum Dare 36 Game Jam. Play as a robot
+built by velociraptors to transport through dimensions and help them survive
+the catastrophic asteroid impact.
 
-Programming:
+## Dependencies
 
-LoadingPleaseWait - C. Michael Murphey
+Debian/Ubuntu users may need to run  
+`sudo apt-get install libsfml-graphics2.3v5 libsfml-system2.3v5 libsfml-window2.3v5 libsfml-audio2.3v5`  
 
-GurgleFurg - Andrew Advani
+### Programming:
 
-Biohazard335 - Daniel/Brian/George/Steven with a ph
+[LoadingPleaseWait] - C. Michael Murphey
 
-Artwork:
+[GurgleFurg] - Andrew Advani
+
+[Biohazard335] - Daniel/Brian/George/Steven with a ph
+
+### Artwork:
 
 Edward Ni
 
-Biohazard335 - Daniel/Brian/George/Steven with a ph
+[Biohazard335] - Daniel/Brian/George/Steven with a ph
 
-Music:
+### Music:
 
-Biohazard335 - Daniel/Brian/George/Steven with a ph
+[Biohazard335] - Daniel/Brian/George/Steven with a ph
 
-Level Design:
+### Level Design:
 
-Biohazard335 - Daniel/Brian/George/Steven with a ph
+[Biohazard335] - Daniel/Brian/George/Steven with a ph
 
-Sound Effects Generated through SFXR
+### Sound Effects Generated through SFXR
+
+[LoadingPleaseWait]:https://loadingpleasewait.us
+[GurgleFurg]:https://github.com/GurgleFurg
+[Biohazard335]:https://github.com/Biohazard335
