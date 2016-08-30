@@ -42,7 +42,7 @@ public:
 	Level* get_level();
 
 	void spawn();
-
+	int getDeaths();
 	
 private:
 	sf::RenderWindow *window;
@@ -61,8 +61,10 @@ private:
 	int grid_y=0; // tile grid y value of player location
 
 	int y_velocity = -3;
+	
+	int deaths = 0;
 
-	float rot;
+	float rot = 0;
 	float total_time=0;
 
 	bool jump=false;

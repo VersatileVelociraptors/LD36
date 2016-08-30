@@ -3,7 +3,7 @@
 EndState::EndState(GameStateManager* manager){
 	this->manager = manager;
 	this->window = manager->getWindow();
-	this->exitButton = new ExitButton(window, 300, 0);
+	this->exitButton = new ExitButton(window, 550, 300);
 }
 
 EndState::~EndState(){

@@ -23,10 +23,9 @@ private:
 	ExitButton* exitButton;
 	GameStateManager* manager;
 	sf::RenderWindow* window;
-	sf::Texture menuGraphicTexture;
-	sf::Sprite* menuGraphicSprite; 
 
-	sf::Text message;
+	sf::Text line1;
+	sf::Text line2;
 	sf::Font font;
 
 };

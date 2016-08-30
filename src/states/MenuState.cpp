@@ -3,26 +3,25 @@ MenuState::MenuState(GameStateManager* manager){
 	this->manager = manager;
 	this->window = manager->getWindow();
 	this->startButton = new StartButton(window, window->getSize().x/2-110, window->getSize().y/2-100);
-	this->exitButton = new ExitButton(window, startButton->getPosition().x, startButton->getPosition().y+startButton->getLocalBounds().height+10);
-	if(!this->menuGraphicTexture.loadFromFile("assets/images/Graphic.png"))
-		window->close();
-	menuGraphicSprite = new sf::Sprite(menuGraphicTexture);
-	menuGraphicSprite->setOrigin(menuGraphicSprite->getLocalBounds().width/2, menuGraphicSprite->getLocalBounds().height/2);
-	menuGraphicSprite->setPosition(startButton->getPosition().x + startButton->getLocalBounds().width/2, startButton->getPosition().y-menuGraphicSprite->getLocalBounds().height/2 - 10);
-
+	this->exitButton = new ExitButton(window, startButton->getPosition().x + 20, startButton->getPosition().y+startButton->getLocalBounds().height+10);
 
 	if (!font.loadFromFile("assets/fonts/arial.ttf"))
 		window->close();
 	
-	message.setFont(font);
-	message.setCharacterSize(30);
-	message.setColor(sf::Color::White);
-	message.setString("penis");
-	message.setPosition(50,50);
+	line1.setFont(font);
+	line1.setCharacterSize(25);
+	line1.setColor(sf::Color::Black);
+	line1.setString("Long ago, to escape mass extinction, the velociraptors built a machine capable of inter-dimensional travel.");
+	line1.setPosition(30,500);
+	
+	line2.setFont(font);
+	line2.setCharacterSize(25);
+	line2.setColor(sf::Color::Black);
+	line2.setString("Millions of years later, that machine has come to life. Welcome to Raptroid Prime.");
+	line2.setPosition(150,550);
 }
 
 MenuState::~MenuState(){
-	delete menuGraphicSprite;
 	delete startButton;
 	delete exitButton;
 }
@@ -47,8 +46,8 @@ void MenuState::update(float dt){
 
 void MenuState::render(){
 	window->clear(sf::Color::White);
-	window->draw(*menuGraphicSprite);
 	window->draw(*startButton);
 	window->draw(*exitButton);
-	window->draw(message);
+	window->draw(line1);
+	window->draw(line2);
 }

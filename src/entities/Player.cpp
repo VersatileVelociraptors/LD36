@@ -225,6 +225,7 @@ void Player::update(float dt){
 		spawn();
 		level->setChangedDimension(false);
 		level->setSwitchActivated(false);
+		deaths++;
 	} else if (currentTileType() == END_TILE) {
 		level->nextLevel();
 		spawn();
@@ -245,4 +246,8 @@ void Player::move(float x, float y){
 /// type of tile under the player
 int Player::currentTileType(){
 	return level->tile_type_grid(get_grid().x, get_grid().y);
+}
+
+int Player::getDeaths(){
+	return deaths;
 }
