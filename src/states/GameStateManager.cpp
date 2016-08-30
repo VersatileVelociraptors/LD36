@@ -8,8 +8,8 @@ GameStateManager::GameStateManager(sf::RenderWindow *window){
 	endState = new EndState(this);
 	musicManager = new MusicManager(window);
 	musicManager->addAllMusicInAssets();
-	musicManager->loop("placeholder");
-	musicManager->play("placeholder");
+	musicManager->loop("music");
+	musicManager->play("music");
 }
 
 GameStateManager::~GameStateManager(){
@@ -30,8 +30,8 @@ void GameStateManager::update(float dt){
 		if (!muted) {
 			musicManager->stop();
 		} else {
-			musicManager->loop("placeholder");
-			musicManager->play("placeholder");
+			musicManager->loop("music");
+			musicManager->play("music");
 		}
 		muted = !muted;
 	}
